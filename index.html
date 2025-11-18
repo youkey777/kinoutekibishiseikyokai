@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LumiFit Studio | 女性専用パーソナルトレーニングジム</title>
+  <meta name="description" content="LumiFit Studioは大人の女性のための完全予約制パーソナルトレーニングジム。姿勢ケアとコンディショニングで10年後も動ける身体づくりをサポートします。" />
+  <style>
+    :root {
+      --base-bg: #f5f1ee;
+      --beige-light: #e7ddd4;
+      --beige-mid: #c4b8ae;
+      --beige-dark: #83796e;
+      --beige-darker: #6f6a63;
+      --text: #2f2a25;
+      --muted: #6b6258;
+      --line: #d7cec7;
+      --white: #fff;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      background: var(--base-bg);
+      color: var(--text);
+      line-height: 1.8;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    section { padding: 4rem 1.25rem; }
+    .container { max-width: 1160px; margin: 0 auto; }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245,241,238,0.95);
+      backdrop-filter: blur(12px);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    header.scrolled {
+      background: rgba(199,188,178,0.95);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.25rem;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .logo { font-weight: 700; letter-spacing: 0.15em; }
+    nav { position: relative; }
+    nav ul { list-style: none; display: flex; gap: 0.8rem; align-items: center; }
+    nav a { font-size: 0.85rem; color: var(--muted); }
+    .btn-primary {
+      background: var(--beige-dark);
+      color: var(--white);
+      padding: 0.6rem 1.3rem;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      border: 1px solid var(--beige-dark);
+      color: var(--beige-dark);
+      padding: 0.5rem 1.3rem;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-outline:hover { background: rgba(131,121,110,0.1); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); }
+
+    /* HERO */
+    .hero { padding-top: 6rem; position: relative; overflow: hidden; }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 20%, rgba(196,184,174,0.25), transparent 40%),
+                  radial-gradient(circle at 90% 50%, rgba(172,163,150,0.18), transparent 45%);
+      z-index: 0;
+    }
+    .hero .container { position: relative; z-index: 1; }
+    .hero-grid { display: grid; gap: 2.5rem; }
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background-image: url('https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    .scroll-indicator { text-align: center; margin-top: 2rem; font-size: 0.85rem; color: var(--muted); }
+    .scroll-indicator::after {
+      content: "↓";
+      display: block;
+      margin-top: 0.3rem;
+      animation: bounce 1.6s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* CONCEPT BELT */
+    .concept-belt { background: var(--beige-light); }
+    .concept-grid { display: grid; gap: 2rem; }
+    .placeholder { border-radius: 20px; border: 1px solid var(--line); min-height: 230px; background-size: cover; background-position: center; }
+    .concept-image { background-image: url('https://images.unsplash.com/photo-1554290854-8f62305ab4d8?auto=format&fit=crop&w=1000&q=80'); }
+
+    /* POINTS */
+    .points-section { background: var(--base-bg); }
+    .points-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 1rem; }
+    .point-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 1.2rem; text-align: center; }
+    .point-icon { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--beige-dark); margin: 0 auto 0.8rem; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--beige-dark); }
+
+    /* MENU */
+    .menu-section { background: var(--beige-light); }
+    .menu-cards { display: grid; gap: 1.5rem; }
+    .menu-card { background: var(--white); border-radius: 28px; border: 1px solid var(--line); padding: 2rem; display: grid; gap: 1.2rem; }
+    .menu-thumb { border-radius: 22px; border: 1px solid var(--line); height: 220px; background-size: cover; background-position: center; }
+    .menu-thumb--training { background-image: url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=900&q=80'); }
+    .menu-thumb--maintenance { background-image: url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=900&q=80'); }
+
+    /* CASE */
+    .case-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 1.25rem; }
+    .case-card { background: var(--white); border-radius: 16px; border: 1px solid var(--line); padding: 1.5rem; display: grid; gap: 0.8rem; }
+    .case-tag { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.08em; }
+
+    /* CTA BAND */
+    .cta-band { background: var(--beige-dark); color: var(--white); border-radius: 24px; padding: 2rem; display: grid; gap: 1rem; position: relative; overflow: hidden; }
+    .cta-band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(255,255,255,0.15), transparent); pointer-events: none; }
+
+    /* TRAINER */
+    .trainer-main { display: grid; gap: 2rem; background: var(--white); border-radius: 24px; border: 1px solid var(--line); padding: 2rem; }
+    .trainer-photo { width: 180px; height: 180px; border-radius: 50%; border: 1px solid var(--line); background-size: cover; background-position: center; }
+    .trainer-photo--main { background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80'); }
+    .trainer-photo--sub1 { background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=500&q=80'); }
+    .trainer-photo--sub2 { background-image: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80'); }
+    .trainer-sub { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .trainer-sub-card { background: var(--white); border-radius: 16px; border: 1px solid var(--line); padding: 1.2rem; display: grid; gap: 0.5rem; }
+
+    /* PRICE */
+    .price-board { background: var(--white); border-radius: 28px; border: 1px solid var(--line); padding: 2rem; display: grid; gap: 1.5rem; }
+    .price-row { display: flex; flex-direction: column; gap: 0.5rem; border-bottom: 1px solid var(--line); padding-bottom: 1rem; }
+    .price-row:last-child { border-bottom: none; }
+    .plan-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 1rem; }
+    .plan-card { border: 1px solid var(--line); border-radius: 18px; padding: 1.2rem; background: var(--base-bg); }
+    .option-band { background: var(--beige-light); border-radius: 18px; padding: 1.3rem; }
+
+    /* ACCESS */
+    .access-grid { display: grid; gap: 1.5rem; }
+    .map-box { border-radius: 20px; border: 1px solid var(--line); min-height: 280px; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--white); background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80'); background-size: cover; background-position: center; }
+    .access-info { background: var(--white); border-radius: 20px; border: 1px solid var(--line); padding: 1.5rem; }
+    .access-icons { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 1rem; }
+    .access-card { border: 1px solid var(--line); border-radius: 14px; padding: 1rem; background: #fff; }
+
+    /* Q&A */
+    .accordion { border: 1px solid var(--line); border-radius: 14px; margin-bottom: 1rem; background: #fff; }
+    .accordion button { width: 100%; text-align: left; padding: 1rem; border: none; background: transparent; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 1rem; }
+    .accordion-content p { margin: 1rem 0; color: var(--muted); }
+
+    /* TRIAL FLOW */
+    .tab-row { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .tab { padding: 0.5rem 1.5rem; border-radius: 999px; border: 1px solid var(--beige-dark); color: var(--beige-dark); cursor: pointer; }
+    .tab.active { background: var(--beige-dark); color: var(--white); }
+    .flow-cards { display: grid; gap: 1rem; }
+    .flow-card { background: var(--white); border-radius: 18px; border: 1px solid var(--line); padding: 1.5rem; display: grid; gap: 1rem; }
+    .flow-thumb { border-radius: 16px; height: 140px; border: 1px solid var(--line); background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80'); }
+    .point-cards { margin-top: 2rem; border-top: 1px solid var(--line); }
+    .point-item { display: grid; gap: 1rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+    .point-thumb { border-radius: 14px; height: 120px; background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=600&q=80'); }
+
+    /* NEWS */
+    .news-section { background: var(--beige-light); }
+    .news-list { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: 1rem; }
+    .news-item { background: #fff; border-radius: 14px; padding: 1rem 1.2rem; border: 1px solid var(--line); }
+
+    /* IMAGE BANNER */
+    .image-banner { background: var(--beige-mid); border-radius: 28px; padding: 2.5rem; display: grid; gap: 1.5rem; }
+    .banner-photo { border-radius: 22px; min-height: 260px; border: 1px solid var(--line); background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80'); }
+
+    /* STUDIO */
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 1rem; }
+    .gallery-item { border-radius: 18px; height: 150px; border: 1px solid var(--line); background-size: cover; background-position: center; }
+    .gallery-item--1 { background-image: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80'); }
+    .gallery-item--2 { background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80'); }
+    .gallery-item--3 { background-image: url('https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=600&q=80'); }
+    .gallery-item--4 { background-image: url('https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?auto=format&fit=crop&w=600&q=80'); }
+    .gallery-item--5 { background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=600&q=80'); }
+    .gallery-item--6 { background-image: url('https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=600&q=80'); }
+
+    /* CONTACT */
+    .contact-footer { background: var(--beige-darker); color: var(--white); padding: 4rem 1.25rem 2rem; }
+    .contact-grid { display: grid; gap: 2rem; max-width: 1160px; margin: 0 auto 2rem; }
+    .contact-card { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 2rem; }
+
+    footer { text-align: center; color: #ddd; font-size: 0.85rem; }
+
+    @media (min-width: 768px) {
+      .hero-grid { grid-template-columns: 1.1fr 0.9fr; }
+      .concept-grid { grid-template-columns: 1.2fr 0.8fr; }
+      .menu-cards { grid-template-columns: repeat(2,1fr); }
+      .trainer-main { grid-template-columns: auto 1fr; align-items: center; }
+      .price-row { flex-direction: row; justify-content: space-between; }
+      .access-grid { grid-template-columns: 1.1fr 0.9fr; }
+      .flow-card { grid-template-columns: 1fr 0.6fr; }
+      .image-banner { grid-template-columns: 0.9fr 1.1fr; align-items: center; }
+      .contact-grid { grid-template-columns: repeat(2,1fr); }
+      nav { position: static; }
+    }
+
+    @media (max-width: 960px) {
+      nav { position: absolute; top: 100%; left: 0; right: 0; background: var(--base-bg); border-bottom: 1px solid var(--line); transform-origin: top; transform: scaleY(0); transition: transform 0.2s ease; }
+      nav.open { transform: scaleY(1); }
+      nav ul { flex-direction: column; padding: 1rem; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="nav-inner">
+      <div class="logo">LumiFit Studio</div>
+      <button class="hamburger" aria-label="メニュー" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav id="global-nav">
+        <ul>
+          <li><a href="#top">HOME</a></li>
+          <li><a href="#concept">CONCEPT</a></li>
+          <li><a href="#menu">MENU</a></li>
+          <li><a href="#case">CASE STUDY</a></li>
+          <li><a href="#trainer">TRAINER</a></li>
+          <li><a href="#price">PRICE LIST</a></li>
+          <li><a href="#access">ACCESS</a></li>
+          <li><a href="#qa">Q&A</a></li>
+          <li><a href="#trial-flow">TRIAL FLOW</a></li>
+          <li><a href="#news">NEWS</a></li>
+          <li><a href="#studio">STUDIO</a></li>
+          <li><a href="#contact">CONTACT</a></li>
+          <li><a class="btn-primary" href="#contact">初回体験を予約する</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <p style="letter-spacing:0.2em; text-transform:uppercase; font-size:0.75rem; color:var(--muted);">大人の女性のためのパーソナルトレーニングスタジオ</p>
+          <h1 style="font-size:clamp(2.2rem,4vw,3.2rem); margin:0.5rem 0;">10年後も、自分らしく動ける体へ。</h1>
+          <p style="margin:0 0 1rem; color:var(--muted);">Personal Training &amp; Body Care for Women</p>
+          <p style="margin-bottom:1.5rem; color:var(--muted);">肩こり・腰の重さ、仕事や家事で蓄積する疲労。LumiFit Studioは生活の延長で通える完全予約制スタジオとして、姿勢・呼吸・柔軟性を整えながら、安心して続けられるプログラムをご提案します。</p>
+          <div style="display:flex; flex-wrap:wrap; gap:1rem;">
+            <a class="btn-primary" href="#contact">初回体験を予約する</a>
+            <a class="btn-outline" href="#menu">メニューを見る</a>
+          </div>
+        </div>
+        <div class="hero-photo" aria-label="ヒーロー画像"></div>
+      </div>
+      <div class="scroll-indicator">Scroll</div>
+    </section>
+
+    <!-- CONCEPT BELT -->
+    <section class="concept-belt" id="concept">
+      <div class="container concept-grid">
+        <div>
+          <p class="section-label">For Your Everyday Life</p>
+          <h2 style="margin-top:0.4rem;">日常を心地よく過ごすための、続けられるトレーニング。</h2>
+          <p>忙しい毎日でも無理なく通えて、身体の声を聞きながら整えられる場所でありたい。LumiFit Studioでは、姿勢チェック・コンディション確認を毎回行い、負荷と緩める時間をバランスよく設計します。</p>
+          <p>肩の力を抜きたい日にはストレッチを多めに。動きたい日には筋力・柔軟性を高めるドリルを追加。仕事や家事との両立を考えたスケジュール提案で、習慣づけをサポートします。</p>
+          <p>「続けること」を第一に、呼吸・睡眠・食事の小さなヒントまで寄り添います。安心感のある空気感と、上質な時間を大切にした空間づくりを心掛けています。</p>
+        </div>
+        <div class="placeholder concept-image" aria-label="コンセプト画像"></div>
+      </div>
+    </section>
+
+    <!-- POINTS -->
+    <section class="points-section">
+      <div class="container">
+        <p class="section-label">Why Choose Us</p>
+        <div class="points-grid" style="margin-top:1.2rem;">
+          <div class="point-card">
+            <div class="point-icon">1</div>
+            <h3>完全予約制・少人数</h3>
+            <p>静かな空間で自分の身体と向き合える、女性専用プライベートスタジオ。</p>
+          </div>
+          <div class="point-card">
+            <div class="point-icon">2</div>
+            <h3>専任トレーナー制</h3>
+            <p>担当トレーナーがヒアリングからプログラム設計まで一貫して担当。</p>
+          </div>
+          <div class="point-card">
+            <div class="point-icon">3</div>
+            <h3>姿勢・柔軟性チェック</h3>
+            <p>毎回のチェックで微細な変化を確認し、継続しやすい指標を共有。</p>
+          </div>
+          <div class="point-card">
+            <div class="point-icon">4</div>
+            <h3>レンタル完備</h3>
+            <p>ウェア・タオル・ドリンクを常備。手ぶらでお越しいただけます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section class="menu-section" id="menu">
+      <div class="container">
+        <p class="section-label">MENU</p>
+        <h2 style="margin-top:0.4rem;">メニュー</h2>
+        <div class="menu-cards">
+          <article class="menu-card">
+            <div class="menu-thumb menu-thumb--training" aria-label="パーソナルトレーニング"></div>
+            <div>
+              <p class="section-label">Personal Training</p>
+              <h3>パーソナルトレーニング</h3>
+              <p>骨盤や肩甲骨の位置、呼吸の質、筋力バランスを丁寧に確認し、目的やライフスタイルに合わせたオーダーメイドメニューをご提供。姿勢安定としなやかな動きを両立させるセッションです。</p>
+              <a class="btn-outline" href="#">詳しく見る</a>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="menu-thumb menu-thumb--maintenance" aria-label="ボディメンテナンス"></div>
+            <div>
+              <p class="section-label">Body Maintenance &amp; Stretch</p>
+              <h3>ボディメンテナンス＆ストレッチ</h3>
+              <p>日々の疲れやデスクワークのこわばりに合わせて、筋膜リリース・ストレッチ・呼吸法を組み合わせ。体液循環を促し、翌日以降も軽やかに動ける身体へ導きます。</p>
+              <a class="btn-outline" href="#">詳しく見る</a>
+            </div>
+          </article>
+        </div>
+        <p style="margin-top:1rem; color:var(--muted);">すべてのメニューにカウンセリングとアフタードリンクが含まれます。</p>
+      </div>
+    </section>
+
+    <!-- CASE STUDY -->
+    <section id="case">
+      <div class="container">
+        <p class="section-label">CASE STUDY</p>
+        <h2 style="margin-top:0.4rem;">ご指導例</h2>
+        <p>実際に通われている方々のケースをご紹介します。ライフスタイルや年代に合わせたご提案が可能です。</p>
+        <div class="case-grid" style="margin-top:1.5rem;">
+          <article class="case-card">
+            <span class="case-tag">30代 / デスクワーク</span>
+            <h3>肩こりと腰の重だるさを軽くしたい</h3>
+            <p>肩周りのモビリティドリルと体幹リセットを組み合わせ、週1のストレッチで血流を促進。仕事中のセルフケアも共有しました。</p>
+            <a class="btn-outline" href="#">詳しく読む</a>
+          </article>
+          <article class="case-card">
+            <span class="case-tag">40代 / 子育て中</span>
+            <h3>体力低下を感じはじめた</h3>
+            <p>呼吸ドリル＋下半身の安定性トレーニングで、日常の抱っこや移動が楽になるようサポート。</p>
+            <a class="btn-outline" href="#">詳しく読む</a>
+          </article>
+          <article class="case-card">
+            <span class="case-tag">50代 / 趣味のダンス</span>
+            <h3>バランスと柔軟性を高めたい</h3>
+            <p>軸足の安定と胸郭の動きを重点的にトレーニング。踊りやすさと疲れにくさが向上。</p>
+            <a class="btn-outline" href="#">詳しく読む</a>
+          </article>
+          <article class="case-card">
+            <span class="case-tag">60代 / 趣味の旅行</span>
+            <h3>長時間歩いても疲れにくい身体へ</h3>
+            <p>股関節の可動域アップと呼吸の再学習で、旅行先でも軽やかに歩けるように準備。</p>
+            <a class="btn-outline" href="#">詳しく読む</a>
+          </article>
+        </div>
+        <div style="text-align:center; margin-top:1.5rem;">
+          <a class="btn-primary" href="#">事例一覧を見る</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <section>
+      <div class="container cta-band">
+        <div style="position:relative; z-index:1;">
+          <p class="section-label" style="color:#f8f5f1;">Trial Session</p>
+          <h2>まずは体験から。運動が苦手な方もご安心ください。</h2>
+          <p>お悩みやご希望を伺いながら、無理のないペースで身体を動かします。気になる点はその場でご相談ください。</p>
+        </div>
+        <div style="text-align:right; position:relative; z-index:1;">
+          <a class="btn-primary" style="background:#f5f1ee; color:var(--beige-dark);" href="#contact">初回体験を予約する</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAINER -->
+    <section id="trainer" style="background:var(--base-bg);">
+      <div class="container">
+        <p class="section-label">TRAINER</p>
+        <h2 style="margin-top:0.4rem;">トレーナー紹介</h2>
+        <div class="trainer-main">
+          <div class="trainer-photo trainer-photo--main" aria-label="トレーナー写真"></div>
+          <div>
+            <h3>Ayaka Mori / 森 綾香</h3>
+            <p>シニアボディケアスペシャリスト / コンディショニングデザイナー</p>
+            <ul>
+              <li>女性専門ジムでの指導歴13年</li>
+              <li>姿勢・呼吸リカバリープログラム開発</li>
+              <li>食生活アドバイザー資格・ボディメンテナンス講師</li>
+            </ul>
+            <p>「年齢や体力はそれぞれ違います。焦らず、安心できるペースで整えていきましょう。身体が整うと、心も自然と軽くなります。」</p>
+          </div>
+        </div>
+        <div class="trainer-sub">
+          <div class="trainer-sub-card">
+            <div class="trainer-photo trainer-photo--sub1" style="width:120px; height:120px; border-radius:20px;" aria-label="サブトレーナー"></div>
+            <h4>Haruka Sato / 佐藤 はるか</h4>
+            <p>ボディメイクトレーナー / リンパケア指導員</p>
+          </div>
+          <div class="trainer-sub-card">
+            <div class="trainer-photo trainer-photo--sub2" style="width:120px; height:120px; border-radius:20px;" aria-label="サブトレーナー"></div>
+            <h4>Mai Okubo / 大久保 まい</h4>
+            <p>ピラティスインストラクター / 呼吸法コーチ</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICE LIST -->
+    <section id="price">
+      <div class="container">
+        <p class="section-label">PRICE LIST</p>
+        <h2 style="margin-top:0.4rem;">料金表</h2>
+        <div class="price-board">
+          <div class="price-row">
+            <strong>入会金</strong>
+            <p>22,000円 → 体験当日のご入会で 0円</p>
+          </div>
+          <div class="price-row">
+            <strong>初回体験（80分）</strong>
+            <p>4,950円（カウンセリング / 姿勢チェック / 体験セッション / アフタードリンク）※当日入会で全額キャッシュバック</p>
+          </div>
+          <div>
+            <h3>短期集中プラン</h3>
+            <div class="plan-grid">
+              <div class="plan-card">
+                <strong>60日ボディメイクコース</strong>
+                <p>全12回 / 118,800円</p>
+                <p>週2回ペースで筋力と柔軟性を同時に強化。食事アドバイス付き。</p>
+              </div>
+              <div class="plan-card">
+                <strong>90日コンディショニングコース</strong>
+                <p>全18回 / 168,300円</p>
+                <p>コンディションに合わせてトレーニングとメンテナンスを柔軟に調整。</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3>月額制プラン</h3>
+            <div class="plan-grid">
+              <div class="plan-card">
+                <strong>Daytime 2</strong>
+                <p>平日10:00-17:00 / 月2回 / 15,400円</p>
+              </div>
+              <div class="plan-card">
+                <strong>Daytime 4</strong>
+                <p>平日10:00-17:00 / 月4回 / 29,700円</p>
+              </div>
+              <div class="plan-card">
+                <strong>Full Access 4</strong>
+                <p>全日利用 / 月4回 / 33,000円</p>
+              </div>
+              <div class="plan-card">
+                <strong>Full Access 6</strong>
+                <p>全日利用 / 月6回 / 46,200円</p>
+              </div>
+            </div>
+          </div>
+          <div class="option-band">
+            <p>オプション：ウェア・タオル無料 / シューズ預かり 1,100円/月 / ペアセッション +4,400円/回</p>
+          </div>
+          <p style="font-size:0.85rem; color:var(--muted);">※価格は税込です。ご予約の変更は前日までにお願いいたします。無断キャンセルは1回分消化となります。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCESS -->
+    <section id="access" style="background:var(--base-bg);">
+      <div class="container">
+        <p class="section-label">ACCESS</p>
+        <h2 style="margin-top:0.4rem;">アクセス</h2>
+        <div class="access-grid">
+          <div class="map-box">MAP</div>
+          <div class="access-info">
+            <p>〒154-0020 東京都世田谷区月影1-4-7 LumiFit Studio 2F</p>
+            <p>・東急月影線「月影駅」徒歩4分<br>・世田谷メトロ「桜通駅」徒歩8分</p>
+            <p>営業時間：平日 9:00-21:00 / 土日祝 9:00-18:00<br>定休日：水曜日・年末年始</p>
+            <p>駐輪スペースあり（2台）/ 近隣コインパーキング多数</p>
+          </div>
+        </div>
+        <div class="access-icons">
+          <div class="access-card">東急月影線 月影駅 徒歩4分</div>
+          <div class="access-card">世田谷メトロ 桜通駅 徒歩8分</div>
+          <div class="access-card">渋谷駅からバスで15分</div>
+          <div class="access-card">近隣にコンビニ・カフェあり</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q&A -->
+    <section id="qa">
+      <div class="container">
+        <p class="section-label">Q&A</p>
+        <h2 style="margin-top:0.4rem;">よくあるご質問</h2>
+        <div class="accordion">
+          <button type="button">運動が得意でなくても大丈夫ですか？<span>＋</span></button>
+          <div class="accordion-content"><p>ペースや強度はその日の体調に合わせて調整します。ストレッチ中心の回も可能です。</p></div>
+        </div>
+        <div class="accordion">
+          <button type="button">持ち物はありますか？<span>＋</span></button>
+          <div class="accordion-content"><p>ウェア・タオルをご用意しています。必要であれば飲み物のみお持ちください。</p></div>
+        </div>
+        <div class="accordion">
+          <button type="button">食事指導はありますか？<span>＋</span></button>
+          <div class="accordion-content"><p>極端な制限ではなく、生活に合わせたバランスの整え方をご提案します。</p></div>
+        </div>
+        <div class="accordion">
+          <button type="button">子ども連れは可能ですか？<span>＋</span></button>
+          <div class="accordion-content"><p>時間帯によって対応しております。ご予約時にご相談ください。</p></div>
+        </div>
+        <div class="accordion">
+          <button type="button">オンラインでの相談は？<span>＋</span></button>
+          <div class="accordion-content"><p>オンラインカウンセリングやフォームチェックも承っています。</p></div>
+        </div>
+        <p style="margin-top:1rem; color:var(--muted);">その他のご質問はLINEまたはお問い合わせフォームからお気軽にどうぞ。</p>
+      </div>
+    </section>
+
+    <!-- TRIAL FLOW -->
+    <section id="trial-flow" style="background:var(--beige-light);">
+      <div class="container">
+        <p class="section-label">TRIAL FLOW</p>
+        <h2 style="margin-top:0.4rem;">初回体験の流れ</h2>
+        <div class="tab-row">
+          <div class="tab active" data-tab="first">初めての方</div>
+          <div class="tab" data-tab="members">ご入会後</div>
+        </div>
+        <div class="flow-cards" id="flow-cards">
+          <div class="flow-card">
+            <div>
+              <p class="section-label">STEP 01</p>
+              <h3>WEBまたはLINEから体験予約</h3>
+              <p>ご希望の日時を選び、事前にお悩みを共有いただくとスムーズです。</p>
+            </div>
+            <div class="flow-thumb" aria-label="ステップ画像"></div>
+          </div>
+          <div class="flow-card">
+            <div>
+              <p class="section-label">STEP 02</p>
+              <h3>カウンセリング＆姿勢チェック</h3>
+              <p>ライフスタイル・体調を伺いながら、姿勢や呼吸を一緒に確認します。</p>
+            </div>
+            <div class="flow-thumb" aria-label="ステップ画像"></div>
+          </div>
+          <div class="flow-card">
+            <div>
+              <p class="section-label">STEP 03</p>
+              <h3>体験セッション</h3>
+              <p>無理のない範囲でトレーニングとストレッチを行い、身体の変化を体感していただきます。</p>
+            </div>
+            <div class="flow-thumb" aria-label="ステップ画像"></div>
+          </div>
+          <div class="flow-card">
+            <div>
+              <p class="section-label">STEP 04</p>
+              <h3>プランご提案</h3>
+              <p>目標やライフスタイルに合わせたプランをご提案。ご不明点はその場で解消します。</p>
+            </div>
+            <div class="flow-thumb" aria-label="ステップ画像"></div>
+          </div>
+        </div>
+        <div class="point-cards">
+          <div class="point-item">
+            <div>
+              <p class="section-label">POINT 01</p>
+              <h3>スマホだけで簡単予約</h3>
+              <p>予約フォームは24時間利用可能。LINE連携でリマインドも受け取れます。</p>
+            </div>
+            <div class="point-thumb" aria-label="ポイント画像"></div>
+          </div>
+          <div class="point-item">
+            <div>
+              <p class="section-label">POINT 02</p>
+              <h3>当日の体調チェック</h3>
+              <p>ご来店時に体温や疲労感を確認。無理のないメニューに切り替えます。</p>
+            </div>
+            <div class="point-thumb" aria-label="ポイント画像"></div>
+          </div>
+          <div class="point-item" style="border-bottom:none;">
+            <div>
+              <p class="section-label">POINT 03</p>
+              <h3>継続しやすいリマインダーメール</h3>
+              <p>予約前日に姿勢ケアのヒントを配信。習慣化を優しく後押しします。</p>
+            </div>
+            <div class="point-thumb" aria-label="ポイント画像"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news" class="news-section">
+      <div class="container">
+        <p class="section-label">NEWS</p>
+        <h2 style="margin-top:0.4rem;">お知らせ・コラム</h2>
+        <p>営業日やキャンペーン、セルフケアコラムなどを不定期で更新しています。</p>
+        <ul class="news-list">
+          <li class="news-item"><strong>2024.07.01</strong><br>夏のオンラインセッションキャンペーンを開始しました。</li>
+          <li class="news-item"><strong>2024.06.20</strong><br>肩こりケアのセルフストレッチ動画を公開しました。</li>
+          <li class="news-item"><strong>2024.06.05</strong><br>7月の営業スケジュールと休館日のお知らせ。</li>
+        </ul>
+        <a class="btn-outline" href="#">すべてのお知らせを見る</a>
+      </div>
+    </section>
+
+    <!-- IMAGE BANNER -->
+    <section>
+      <div class="container image-banner">
+        <div class="banner-photo" aria-label="オンライン案内画像"></div>
+        <div>
+          <p class="section-label">Online Session</p>
+          <h2>ご自宅でも受けられるオンラインセッション</h2>
+          <p>画面越しにフォームを確認しながら、簡単な道具で行えるトレーニングとストレッチをご案内。遠方の方や子育て中の方にも好評です。</p>
+          <a class="btn-primary" href="#">詳しく見る</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDIO -->
+    <section id="studio">
+      <div class="container">
+        <p class="section-label">STUDIO</p>
+        <h2 style="margin-top:0.4rem;">スタジオの雰囲気</h2>
+        <div class="gallery-grid" style="margin-top:1.5rem;">
+          <div class="gallery-item gallery-item--1" aria-label="ギャラリー"></div>
+          <div class="gallery-item gallery-item--2" aria-label="ギャラリー"></div>
+          <div class="gallery-item gallery-item--3" aria-label="ギャラリー"></div>
+          <div class="gallery-item gallery-item--4" aria-label="ギャラリー"></div>
+          <div class="gallery-item gallery-item--5" aria-label="ギャラリー"></div>
+          <div class="gallery-item gallery-item--6" aria-label="ギャラリー"></div>
+        </div>
+        <p style="margin-top:1.5rem;">自然光が入るフロアに、木目とアイボリーを基調とした落ち着いた空間。香りや音楽にもこだわり、心がほぐれる時間をご用意しています。</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- CONTACT + FOOTER -->
+  <section id="contact" class="contact-footer">
+    <div class="contact-grid">
+      <div class="contact-card">
+        <p class="section-label" style="color:#fff;">CONTACT</p>
+        <h2>お問い合わせ・初回体験予約</h2>
+        <p>体験予約・ご相談はLINEまたはメールフォームから承ります。ご希望の日時やお悩みをお気軽にお知らせください。</p>
+        <div style="display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+          <a class="btn-primary" style="background:#fff; color:var(--beige-dark);" href="#">LINEで相談する</a>
+          <a class="btn-outline" style="color:#fff; border-color:#fff;" href="#">メールフォーム</a>
+        </div>
+        <p>Mail: hello@lumifit-studio.jp<br>LINE ID: @lumifitstudio</p>
+      </div>
+      <div class="contact-card">
+        <p class="section-label" style="color:#fff;">ACCESS SUMMARY</p>
+        <h2>LumiFit Studio</h2>
+        <p>〒154-0020 東京都世田谷区月影1-4-7 2F<br>月影駅 徒歩4分 / 桜通駅 徒歩8分</p>
+        <p>営業時間：平日 9:00-21:00 / 土日祝 9:00-18:00</p>
+        <div class="sns" style="display:flex; gap:1rem;">
+          <a href="#">Instagram</a>
+          <a href="#">X</a>
+        </div>
+      </div>
+    </div>
+    <footer>© 2025 LumiFit Studio All Rights Reserved.</footer>
+  </section>
+
+  <script>
+    const header = document.querySelector('header');
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.getElementById('global-nav');
+    hamburger.addEventListener('click', () => {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('open');
+    });
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    const accordions = document.querySelectorAll('.accordion');
+    accordions.forEach(acc => {
+      const btn = acc.querySelector('button');
+      const content = acc.querySelector('.accordion-content');
+      btn.addEventListener('click', () => {
+        const isOpen = content.style.maxHeight;
+        document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+        document.querySelectorAll('.accordion button span').forEach(s => s.textContent = '＋');
+        if (!isOpen) {
+          content.style.maxHeight = content.scrollHeight + 'px';
+          btn.querySelector('span').textContent = '－';
+        }
+      });
+    });
+
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
+
