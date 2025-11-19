@@ -125,7 +125,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: 0.8rem 1rem;
+      padding: 1rem;
+      max-height: 80px;
     }
     .logo {
       display: flex;
@@ -133,10 +134,16 @@
       gap: 0.9rem;
       font-weight: 600;
       letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .logo span {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      writing-mode: horizontal-tb;
     }
     .logo img {
-      width: 160px;
-      height: auto;
+      width: auto;
+      height: 50px;
+      max-width: 160px;
       object-fit: contain;
     }
     nav {
@@ -823,6 +830,18 @@
       0% { transform: translate3d(-6px, 4px, 0); }
       50% { transform: translate3d(6px, -6px, 0); }
       100% { transform: translate3d(-6px, 4px, 0); }
+    }
+    @media (max-width: 767px) {
+      .logo span {
+        font-size: 0.85rem;
+      }
+      .logo img {
+        height: 40px;
+        max-width: 120px;
+      }
+      .header-inner {
+        max-height: 70px;
+      }
     }
     @media (min-width: 768px) {
       .nav-links {
