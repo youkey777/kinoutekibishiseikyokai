@@ -121,11 +121,13 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.06);
     }
     .header-inner {
+      width: min(1200px, 92%);
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: 1rem;
+      padding: 1rem 0;
       max-height: 80px;
     }
     .logo {
@@ -696,11 +698,13 @@
       overflow: hidden;
       border: 2px solid rgba(227, 192, 138, 0.4);
       box-shadow: var(--shadow-soft);
+      position: relative;
     }
     .map-frame iframe {
       width: 100%;
       height: 320px;
       border: 0;
+      pointer-events: auto;
     }
     .route-icons {
       margin-top: 2rem;
@@ -798,10 +802,10 @@
       animation: flowSlideIn 0.7s ease-out backwards;
     }
     .flow-step:nth-child(1) { animation-delay: 0s; }
-    .flow-step:nth-child(2) { animation-delay: 0.15s; }
-    .flow-step:nth-child(3) { animation-delay: 0.3s; }
-    .flow-step:nth-child(4) { animation-delay: 0.45s; }
-    .flow-step:nth-child(5) { animation-delay: 0.6s; }
+    .flow-step:nth-child(2) { animation-delay: 0.08s; }
+    .flow-step:nth-child(3) { animation-delay: 0.16s; }
+    .flow-step:nth-child(4) { animation-delay: 0.24s; }
+    .flow-step:nth-child(5) { animation-delay: 0.32s; }
     @keyframes flowSlideIn {
       0% {
         opacity: 0;
@@ -1265,7 +1269,9 @@
         width: 140px;
       }
       .trainer-main {
-        grid-template-columns: 140px 1fr;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
       }
       .case-grid::before {
         display: none;
@@ -1377,7 +1383,7 @@
         <div class="hero-text" data-animate>
           <p class="section-eyebrow">Sports Circle &amp; Athlete Support</p>
           <h1>怪我を減らし、パフォーマンスを上げる。</h1>
-          <p>スポーツサークル・アスリート・指導者の運動時の怪我、身体の衰え、パフォーマンス低下に寄り添います。機能的にも美しい姿勢を通じて、個人セッション・団体研修・オンライン講座まで幅広く提供。LINEでいつでも相談できます。</p>
+          <p>スポーツサークル・アスリート・指導者の運動時の怪我、身体の衰え、パフォーマンス低下に寄り添います。</p>
           <div class="hero-buttons">
             <a class="btn btn-primary" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINEで相談する</a>
             <a class="btn btn-secondary" href="#menu">プログラムを見る</a>
@@ -1408,7 +1414,6 @@
           <p class="section-eyebrow">MISSION</p>
           <h2 class="section-title">姿勢の研究をスポーツ現場へ循環させる。</h2>
           <p>日本機能的美姿勢協会は、姿勢の重要性の認知と研究を軸に、スポーツサークル・メディア・自治体・学生・施術家まで幅広い皆さまと協働しています。見た目と機能美を兼ね備えた姿勢づくり、動かせていない筋肉へのアプローチ、筋肉や関節の連動性を高めるメソッドを、確かなデータと実践で届けます。</p>
-          <p>のべ5万人以上の治療・指導から得た知見をベースに、信用金庫での健康セミナーや同業者への講師実績など、公的な場でも信頼を重ねています。スポーツサークルや企業のクラブ活動が「ここなら相談したい」と思える安心感を、LINE登録から体験してください。</p>
         </div>
         <div class="image-placeholder js-fade-up" data-delay="1">
           <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=1200&q=80" alt="姿勢研究を共有するカンファレンスの様子" loading="lazy">
@@ -1518,21 +1523,9 @@
             <p>のべ5万人の治療実績をもとに、動かせていない筋肉を意識化。1か月で腰痛の訴えが半数以下となり、パフォーマンス維持への手応えを実感されています。</p>
             <a href="#">詳しく読む</a>
           </article>
-          <article class="case-card js-fade-up" data-delay="2">
-            <div class="case-tag">中学校バスケ部 / 正確な身体操作</div>
-            <h4>姿勢と言語化のワークで基礎動作を共有</h4>
-            <p>「見た目と機能美」を両立する姿勢をカード化し、選手同士でチェック。コーチの指示が伝わりやすくなり、県大会ベスト8に進出しました。</p>
-            <a href="#">詳しく読む</a>
-          </article>
-          <article class="case-card js-fade-up" data-delay="3">
-            <div class="case-tag">信用金庫セミナー / デスクワーカー</div>
-            <h4>オンライン体操教室で肩こり改善をサポート</h4>
-            <p>社員の身体の衰えとテレワーク疲労に対応。姿勢計測アプリとLINEサポートを組み合わせ、継続率90%超の健康施策として評価されています。</p>
-            <a href="#">詳しく読む</a>
-          </article>
         </div>
         <div style="text-align:center; margin-top:2rem;">
-          <a class="btn btn-secondary" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">事例一覧をLINEで受け取る</a>
+          <a class="btn btn-secondary" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">その他事例一覧を見る</a>
         </div>
       </div>
     </section>
@@ -1607,16 +1600,6 @@
               <p style="margin:0;">※LINE登録から30日以内の申し込みで無料</p>
             </div>
           </div>
-          <div class="price-row">
-            <div>
-              <strong>初回体験 90分</strong>
-              <p>ヒアリング＋姿勢評価＋提案書</p>
-            </div>
-            <div>
-              <strong>15,000円</strong>
-              <p style="margin:0;">当日ご契約で全額キャッシュバック</p>
-            </div>
-          </div>
           <div>
             <h3>短期集中プラン</h3>
             <div class="short-plan-grid">
@@ -1626,23 +1609,11 @@
                 <p><b>150,000円〜</b>（人数・会場により変動）</p>
                 <p>怪我を減らしながら基礎体力を整えたいサークルにおすすめ。</p>
               </article>
-              <article class="plan-card">
-                <strong>90日コンディショニング強化</strong>
-                <p>・全12回 / 90分<br>・動画フィードバック＋栄養アドバイス</p>
-                <p><b>280,000円〜</b></p>
-                <p>大会シーズンに合わせたパフォーマンス向上と身体の衰え対策に最適です。</p>
-              </article>
             </div>
           </div>
           <div>
             <h3>月額制サポート（目安）</h3>
             <div class="monthly-plan-grid">
-              <article class="plan-card">
-                <strong>デイタイム月2回</strong>
-                <p>平日10:00-17:00 / 90分指導</p>
-                <p>55,000円〜</p>
-                <p>午前中の練習や企業クラブに人気。</p>
-              </article>
               <article class="plan-card">
                 <strong>フルタイム月4回</strong>
                 <p>土日含む終日対応 / 75分</p>
@@ -1655,21 +1626,7 @@
                 <p>80,000円〜</p>
                 <p>遠隔チームや施術家研修向け。</p>
               </article>
-              <article class="plan-card">
-                <strong>体操教室パッケージ</strong>
-                <p>月2回 × 45分 / 最大30名</p>
-                <p>60,000円〜</p>
-                <p>信用金庫・自治体の健康施策に。</p>
-              </article>
             </div>
-          </div>
-          <div class="options-band">
-            <strong>オプション・その他</strong>
-            <ul>
-              <li>ウェア・タオルレンタル、シューズ預かり</li>
-              <li>LINE個別コーチング、動画添削</li>
-              <li>ペアセッション、メディア取材対応</li>
-            </ul>
           </div>
           <p class="price-note">※表示価格は税込の目安です。人数・開催地・内容によりお見積りいたします。キャンセルポリシーは7日前まで無料、以降は50%をお願いしております。</p>
         </div>
@@ -1815,57 +1772,11 @@
                   <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="プログラム資料の確認" loading="lazy">
                 </div>
               </article>
-              <article class="flow-step js-fade-up" data-delay="3">
-                <div>
-                  <p class="step-label">STEP 04</p>
-                  <h3>当日の研修・講座実施</h3>
-                  <p>姿勢の見える化、体操教室、筋肉や関節の連動性トレーニングなどを組み合わせて実施します。</p>
-                </div>
-                <div class="image-placeholder" style="height:150px;">
-                  <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=800&q=80" alt="トレーニング講座の様子" loading="lazy">
-                </div>
-              </article>
-              <article class="flow-step js-fade-up" data-delay="0">
-                <div>
-                  <p class="step-label">STEP 05</p>
-                  <h3>アフターフォロー・継続サポート</h3>
-                  <p>LINEでの質問対応、動画添削、オンライン講座への招待などで継続的に支援します。</p>
-                </div>
-                <div class="image-placeholder" style="height:150px;">
-                  <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=800&q=80" alt="オンラインフォローのイメージ" loading="lazy">
-                </div>
-              </article>
             </div>
           </div>
           <div class="tab-panel" id="members">
             <p>ご入会後は、月ごとの姿勢レポート、動画アーカイブ、施術家向け研究会などを活用いただけます。LINEで「#フォロー」と送信すると、担当トレーナーにつながる専用フォームをご案内します。</p>
           </div>
-        </div>
-        <div class="booking-points">
-          <article class="booking-point">
-            <p class="point-label">POINT 01</p>
-            <h4>スマホだけで日程調整</h4>
-            <p>LINEのカレンダーリンクから候補日を選ぶだけ。複数チームでの共有も簡単です。</p>
-            <div class="image-placeholder" style="height:140px;">
-              <img src="https://images.unsplash.com/photo-1483058712412-4245e9b90334?auto=format&fit=crop&w=800&q=80" alt="日程調整画面イメージ" loading="lazy">
-            </div>
-          </article>
-          <article class="booking-point">
-            <p class="point-label">POINT 02</p>
-            <h4>オンライン面談の録画共有</h4>
-            <p>ヒアリングや講座をすべてアーカイブ。あとからメンバーに共有できるので安心です。</p>
-            <div class="image-placeholder" style="height:140px;">
-              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="オンライン面談のキャプチャ" loading="lazy">
-            </div>
-          </article>
-          <article class="booking-point">
-            <p class="point-label">POINT 03</p>
-            <h4>LINEでリアルタイムサポート</h4>
-            <p>動画添削や食事アドバイスなど、必要なときにすぐ相談可能。チーム全員で共有もできます。</p>
-            <div class="image-placeholder" style="height:140px;">
-              <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=800&q=80" alt="LINEでのやりとりイメージ" loading="lazy">
-            </div>
-          </article>
         </div>
       </div>
     </section>
