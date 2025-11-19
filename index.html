@@ -407,11 +407,12 @@
       background: radial-gradient(circle, rgba(227,192,138,0.35), rgba(227,192,138,0.08));
       transform: translate(-50%, -50%);
       z-index: 0;
+      opacity: 0;
     }
-    .point-card:nth-child(1)::before { animation: circleExpand 1.4s 0.1s ease-out forwards; }
-    .point-card:nth-child(2)::before { animation: circleExpand 1.4s 0.3s ease-out forwards; }
-    .point-card:nth-child(3)::before { animation: circleExpand 1.4s 0.5s ease-out forwards; }
-    .point-card:nth-child(4)::before { animation: circleExpand 1.4s 0.7s ease-out forwards; }
+    .point-card.animate-active:nth-child(1)::before { animation: circleExpand 1.4s 0.1s ease-out forwards; }
+    .point-card.animate-active:nth-child(2)::before { animation: circleExpand 1.4s 0.3s ease-out forwards; }
+    .point-card.animate-active:nth-child(3)::before { animation: circleExpand 1.4s 0.5s ease-out forwards; }
+    .point-card.animate-active:nth-child(4)::before { animation: circleExpand 1.4s 0.7s ease-out forwards; }
     .point-card > * {
       position: relative;
       z-index: 1;
@@ -471,10 +472,14 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       transform-style: preserve-3d;
       transform-origin: center;
-      animation: slideRotate 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+      opacity: 0;
+      transform: translateX(-100px) rotate(-5deg);
     }
-    .menu-card:nth-child(1) { animation-delay: 0s; }
-    .menu-card:nth-child(2) { animation-delay: 0.2s; }
+    .menu-card.animate-active {
+      animation: slideRotate 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    .menu-card.animate-active:nth-child(1) { animation-delay: 0s; }
+    .menu-card.animate-active:nth-child(2) { animation-delay: 0.2s; }
     .menu-card:hover {
       transform: translate3d(0, -4px, 0) rotateX(3deg);
       box-shadow: 0 24px 45px rgba(0,0,0,0.08);
@@ -507,12 +512,16 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       transform-style: preserve-3d;
       transform-origin: center;
-      animation: bounceUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+      opacity: 0;
+      transform: translateY(100px);
     }
-    .case-card:nth-child(1) { animation-delay: 0s; }
-    .case-card:nth-child(2) { animation-delay: 0.15s; }
-    .case-card:nth-child(3) { animation-delay: 0.3s; }
-    .case-card:nth-child(4) { animation-delay: 0.45s; }
+    .case-card.animate-active {
+      animation: bounceUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    .case-card.animate-active:nth-child(1) { animation-delay: 0s; }
+    .case-card.animate-active:nth-child(2) { animation-delay: 0.15s; }
+    .case-card.animate-active:nth-child(3) { animation-delay: 0.3s; }
+    .case-card.animate-active:nth-child(4) { animation-delay: 0.45s; }
     .case-card:hover {
       transform: translate3d(0, -4px, 0) rotateX(3deg);
       box-shadow: 0 24px 45px rgba(0,0,0,0.08);
@@ -554,20 +563,20 @@
     }
     .trainer-main {
       display: grid;
-      gap: 1rem;
+      gap: 1.5rem;
       margin-top: 2rem;
-      grid-template-columns: 120px 1fr;
-      align-items: start;
+      grid-template-columns: 200px 1fr;
+      align-items: center;
     }
     .trainer-photo {
-      width: 120px;
+      width: 200px;
       max-width: 65vw;
       border-radius: 50%;
       background: rgba(227, 192, 138, 0.15);
       overflow: hidden;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
       margin: 0;
-      border: 2px solid var(--card-bg);
+      border: 3px solid var(--card-bg);
     }
     .trainer-details h3 {
       margin: 0;
@@ -837,11 +846,15 @@
     .news-item {
       padding: 1.2rem 0;
       border-bottom: 1px solid var(--line);
-      animation: scaleBounce 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) backwards;
+      opacity: 0;
+      transform: scale(0.3);
     }
-    .news-item:nth-child(1) { animation-delay: 0s; }
-    .news-item:nth-child(2) { animation-delay: 0.15s; }
-    .news-item:nth-child(3) { animation-delay: 0.3s; }
+    .news-item.animate-active {
+      animation: scaleBounce 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+    .news-item.animate-active:nth-child(1) { animation-delay: 0s; }
+    .news-item.animate-active:nth-child(2) { animation-delay: 0.15s; }
+    .news-item.animate-active:nth-child(3) { animation-delay: 0.3s; }
     @keyframes scaleBounce {
       0% {
         transform: scale(0.3);
@@ -1249,10 +1262,10 @@
         max-height: 70px;
       }
       .trainer-photo {
-        width: 100px;
+        width: 140px;
       }
       .trainer-main {
-        grid-template-columns: 100px 1fr;
+        grid-template-columns: 140px 1fr;
       }
       .case-grid::before {
         display: none;
@@ -1554,8 +1567,6 @@
               <li>のべ5万人以上の治療・指導実績。同業者への講師登壇や信用金庫での健康セミナーも担当。</li>
               <li>筋肉と関節の連動性に基づいたプログラムで、怪我予防からパフォーマンス向上まで一気通貫で支援。</li>
             </ul>
-            <p>スポーツサークルには、限られた練習時間で身体の使い方を整える仕組みが必要です。LINEでの相談から始まる対話を大切にし、正確な身体操作と見た目の整いを両立させます。</p>
-            <p>自治体やメディア、デスクワーカー向けの健康施策にも対応しています。姿勢について研究する私たちだからこそ、エビデンスに基づいた安心感を提供します。</p>
           </div>
         </div>
         <div class="sub-trainers">
@@ -2070,6 +2081,30 @@
       );
 
       caseObserver.observe(caseGrid);
+    }
+
+    // ========================================
+    // スクロール連動アニメーション発火
+    // ========================================
+    const animateTargets = document.querySelectorAll('.menu-card, .news-item, .point-card, .case-card');
+
+    if ('IntersectionObserver' in window && animateTargets.length) {
+      const animateObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate-active');
+              animateObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.2,
+          rootMargin: '0px 0px -100px 0px'
+        }
+      );
+
+      animateTargets.forEach((target) => animateObserver.observe(target));
     }
   </script>
 </body>
