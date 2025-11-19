@@ -14,7 +14,10 @@
       --greige: #6f6a63;
       --text-main: #3a352e;
       --accent: #8d8175;
-      --white: #ffffff;
+      --sage: #8ca7a1;
+      --calm-blue: #9fb9c9;
+      --linen: #f9f7f4;
+      --line: rgba(111, 106, 99, 0.2);
     }
     * {
       box-sizing: border-box;
@@ -23,11 +26,27 @@
       scroll-behavior: smooth;
     }
     body {
+      position: relative;
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
       background-color: var(--ivory);
       color: var(--text-main);
       line-height: 1.8;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 10% 20%, rgba(159, 185, 201, 0.2), transparent 50%), radial-gradient(circle at 90% 10%, rgba(223, 208, 196, 0.25), transparent 45%);
+      opacity: 0.65;
+      pointer-events: none;
+      z-index: -2;
+    }
+    main {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 30px 60px rgba(58, 53, 46, 0.12);
     }
     img {
       max-width: 100%;
@@ -36,6 +55,7 @@
     a {
       color: inherit;
       text-decoration: none;
+      transition: color 0.2s ease;
     }
     button {
       font-family: inherit;
@@ -44,18 +64,40 @@
       width: min(1200px, 92%);
       margin: 0 auto;
     }
-    /* HEADER */
+    section {
+      position: relative;
+    }
+    .section-title {
+      position: relative;
+      font-size: 1.6rem;
+      margin: 0.1rem 0 1rem;
+      letter-spacing: 0.04em;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--sage), transparent);
+      margin-top: 0.5rem;
+    }
+    .section-eyebrow {
+      letter-spacing: 0.35em;
+      font-size: 0.85rem;
+      color: var(--calm-blue);
+      text-transform: uppercase;
+    }
     header {
       position: sticky;
       top: 0;
       z-index: 999;
       background: rgba(245, 241, 238, 0.95);
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid rgba(111, 106, 99, 0.1);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(111, 106, 99, 0.15);
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
     header.scrolled {
-      background: rgba(199, 190, 181, 0.96);
+      background: rgba(199, 190, 181, 0.97);
       box-shadow: 0 6px 20px rgba(57, 49, 44, 0.1);
     }
     .header-inner {
@@ -69,6 +111,11 @@
       font-weight: 600;
       font-size: 1.1rem;
       letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-left: 3px solid var(--sage);
+      padding-left: 0.75rem;
     }
     nav {
       flex: 1;
@@ -86,16 +133,20 @@
       width: min(320px, 90vw);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
     }
-    .nav-links.open {
-      display: flex;
-    }
     .nav-links a {
       font-size: 0.9rem;
       letter-spacing: 0.08em;
+      color: var(--text-main);
+    }
+    .nav-links a:hover {
+      color: var(--calm-blue);
+    }
+    .nav-links.open {
+      display: flex;
     }
     .primary-cta {
       padding: 0.65rem 1rem;
-      background: var(--greige);
+      background: var(--sage);
       color: var(--white);
       border-radius: 999px;
       font-size: 0.9rem;
@@ -105,7 +156,7 @@
     }
     .primary-cta:hover {
       transform: translateY(-1px);
-      box-shadow: 0 8px 16px rgba(111, 106, 99, 0.2);
+      box-shadow: 0 8px 18px rgba(140, 167, 161, 0.35);
     }
     .mobile-nav-toggle {
       width: 40px;
@@ -137,10 +188,9 @@
       position: absolute;
       top: 6px;
     }
-    /* HERO */
     .hero {
       padding: 6rem 0 4rem;
-      background: linear-gradient(135deg, rgba(231, 223, 215, 0.6), rgba(255, 255, 255, 0.7));
+      background: linear-gradient(135deg, rgba(231, 223, 215, 0.75), rgba(159, 185, 201, 0.35));
       position: relative;
       overflow: hidden;
     }
@@ -149,9 +199,10 @@
       position: absolute;
       inset: 10% -20% auto -20%;
       height: 80%;
-      background: radial-gradient(circle at top, rgba(207, 195, 183, 0.4), transparent 60%);
+      background: radial-gradient(circle at top, rgba(159, 185, 201, 0.35), transparent 60%);
       pointer-events: none;
       z-index: 0;
+      animation: heroGlow 12s ease-in-out infinite;
     }
     .hero-content {
       position: relative;
@@ -162,10 +213,11 @@
     .hero-text h1 {
       font-size: 2rem;
       margin: 0.5rem 0;
+      letter-spacing: 0.02em;
     }
     .hero-text p {
       margin: 0 0 1rem;
-      color: rgba(58, 53, 46, 0.8);
+      color: rgba(58, 53, 46, 0.85);
     }
     .hero-buttons {
       display: flex;
@@ -174,20 +226,20 @@
       margin-top: 1rem;
     }
     .btn {
-      padding: 0.75rem 1.5rem;
+      padding: 0.75rem 1.6rem;
       border-radius: 999px;
       border: 1px solid transparent;
       font-size: 0.95rem;
       letter-spacing: 0.05em;
-      transition: background 0.2s ease, color 0.2s ease;
+      transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
       text-align: center;
     }
     .btn-primary {
-      background: var(--greige);
+      background: var(--sage);
       color: var(--white);
     }
     .btn-primary:hover {
-      background: #59544e;
+      background: #748f8b;
     }
     .btn-secondary {
       border-color: var(--greige);
@@ -202,11 +254,12 @@
       width: min(320px, 70vw);
       height: min(320px, 70vw);
       border-radius: 40% 60% 50% 50%;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.8), rgba(207, 195, 183, 0.7));
-      border: 2px solid rgba(111, 106, 99, 0.25);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(207, 195, 183, 0.7));
+      border: 2px solid rgba(111, 106, 99, 0.2);
       display: flex;
       overflow: hidden;
       margin: 0 auto;
+      animation: float 9s ease-in-out infinite;
     }
     .hero-visual img {
       width: 100%;
@@ -239,7 +292,6 @@
       border-right: 5px solid transparent;
       border-top: 6px solid rgba(58, 53, 46, 0.3);
     }
-    /* CONCEPT */
     .concept-band {
       background: var(--beige-light);
       padding: 3.5rem 0;
@@ -251,7 +303,7 @@
     }
     .image-placeholder {
       background: rgba(255, 255, 255, 0.6);
-      border: 2px solid rgba(111, 106, 99, 0.15);
+      border: 2px solid var(--line);
       border-radius: 1.5rem;
       width: 100%;
       height: 220px;
@@ -263,7 +315,6 @@
       height: 100%;
       object-fit: cover;
     }
-    /* POINTS */
     #functional-posture {
       padding: 3rem 0;
     }
@@ -276,18 +327,19 @@
       border-radius: 1rem;
       padding: 1.5rem;
       text-align: center;
-      box-shadow: 0 12px 30px rgba(57, 49, 44, 0.05);
+      box-shadow: 0 12px 30px rgba(57, 49, 44, 0.08);
+      border: 1px solid rgba(140, 167, 161, 0.12);
     }
     .point-icon {
       width: 64px;
       height: 64px;
       border-radius: 50%;
       margin: 0 auto 1rem;
-      background: rgba(207, 195, 183, 0.36);
+      background: rgba(140, 167, 161, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--greige);
+      color: var(--sage);
     }
     .point-icon svg {
       width: 28px;
@@ -298,19 +350,8 @@
       stroke-linecap: round;
       stroke-linejoin: round;
     }
-    /* MENU */
     .menu-section {
       padding: 3.5rem 0;
-    }
-    .section-eyebrow {
-      letter-spacing: 0.3em;
-      font-size: 0.85rem;
-      color: var(--accent);
-      text-transform: uppercase;
-    }
-    .section-title {
-      font-size: 1.6rem;
-      margin: 0.1rem 0 1rem;
     }
     .menu-cards {
       display: grid;
@@ -321,11 +362,11 @@
       background: var(--white);
       border-radius: 1.8rem;
       padding: 2rem;
-      box-shadow: 0 25px 40px rgba(131, 121, 110, 0.08);
+      box-shadow: 0 25px 40px rgba(131, 121, 110, 0.1);
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      border: 1px solid rgba(131, 121, 110, 0.1);
+      border: 1px solid rgba(131, 121, 110, 0.12);
     }
     .menu-card .image-placeholder {
       height: 220px;
@@ -334,7 +375,6 @@
     .menu-card .btn-secondary {
       align-self: flex-start;
     }
-    /* CASE STUDY */
     .case-study {
       padding: 3.5rem 0;
       background: var(--beige-light);
@@ -349,27 +389,15 @@
       border-radius: 1.25rem;
       padding: 1.5rem;
       border: 1px solid rgba(131, 121, 110, 0.15);
+      box-shadow: 0 18px 30px rgba(57, 49, 44, 0.08);
     }
     .case-tag {
       font-size: 0.8rem;
       letter-spacing: 0.1em;
-      color: var(--accent);
+      color: var(--calm-blue);
     }
-    .case-card h4 {
-      margin: 0.8rem 0 0.5rem;
-    }
-    .case-card a {
-      color: var(--greige);
-      font-weight: 600;
-      letter-spacing: 0.05em;
-    }
-    .case-button {
-      margin-top: 2rem;
-      text-align: center;
-    }
-    /* CTA BAND */
     .cta-band {
-      background: var(--greige);
+      background: linear-gradient(135deg, var(--greige), #595651);
       color: var(--white);
       padding: 2.5rem 0;
       position: relative;
@@ -379,8 +407,8 @@
       content: "";
       position: absolute;
       inset: 15% 5%;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
       pointer-events: none;
     }
     .cta-content {
@@ -389,7 +417,6 @@
       gap: 1.5rem;
       align-items: center;
     }
-    /* TRAINER */
     .trainer {
       padding: 4rem 0;
     }
@@ -406,6 +433,7 @@
       border: 2px solid rgba(111, 106, 99, 0.2);
       margin: 0 auto;
       overflow: hidden;
+      box-shadow: 0 12px 30px rgba(57, 49, 44, 0.12);
     }
     .trainer-photo img,
     .mini-photo img {
@@ -430,6 +458,7 @@
       display: flex;
       gap: 1rem;
       align-items: center;
+      box-shadow: 0 15px 25px rgba(57, 49, 44, 0.08);
     }
     .sub-trainer-card .mini-photo {
       width: 70px;
@@ -438,7 +467,6 @@
       background: rgba(207, 195, 183, 0.3);
       overflow: hidden;
     }
-    /* PRICE */
     .price {
       padding: 4rem 0;
       background: var(--beige-light);
@@ -447,7 +475,7 @@
       background: var(--white);
       border-radius: 1.5rem;
       padding: 2rem;
-      box-shadow: 0 20px 40px rgba(111, 106, 99, 0.1);
+      box-shadow: 0 20px 40px rgba(111, 106, 99, 0.12);
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
@@ -469,13 +497,11 @@
       gap: 1rem;
     }
     .price-card {
-      border: 1px solid rgba(58, 53, 46, 0.1);
+      border: 1px solid rgba(58, 53, 46, 0.12);
       border-radius: 1rem;
       padding: 1.25rem;
-      background: rgba(245, 241, 238, 0.5);
-    }
-    .price-card h4 {
-      margin: 0 0 0.3rem;
+      background: rgba(245, 241, 238, 0.7);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
     }
     .price-note {
       font-size: 0.8rem;
@@ -487,7 +513,6 @@
       list-style: disc;
       padding-left: 1.5rem;
     }
-    /* ACCESS */
     .access {
       padding: 4rem 0;
     }
@@ -503,6 +528,7 @@
       border: 2px solid rgba(58, 53, 46, 0.15);
       overflow: hidden;
       background: rgba(207, 195, 183, 0.2);
+      box-shadow: 0 15px 30px rgba(57, 49, 44, 0.1);
     }
     .map-placeholder iframe {
       width: 100%;
@@ -521,6 +547,7 @@
       padding: 0.75rem 1rem;
       background: var(--beige-light);
       border-radius: 0.8rem;
+      border: 1px solid var(--line);
     }
     .route-card .point-icon {
       width: 48px;
@@ -531,7 +558,6 @@
       width: 22px;
       height: 22px;
     }
-    /* Q&A */
     .qa {
       padding: 4rem 0;
       background: var(--beige-light);
@@ -542,6 +568,7 @@
       margin-bottom: 1rem;
       overflow: hidden;
       border: 1px solid rgba(58, 53, 46, 0.08);
+      box-shadow: 0 12px 24px rgba(57, 49, 44, 0.06);
     }
     .qa-question {
       width: 100%;
@@ -575,7 +602,6 @@
       font-size: 1.5rem;
       color: var(--accent);
     }
-    /* FLOW */
     .trial-flow {
       padding: 4rem 0;
     }
@@ -612,6 +638,7 @@
       border-radius: 1.25rem;
       padding: 1.5rem;
       border: 1px solid rgba(58, 53, 46, 0.1);
+      box-shadow: 0 15px 25px rgba(57, 49, 44, 0.08);
     }
     .step-label {
       font-size: 0.8rem;
@@ -643,7 +670,6 @@
       height: 140px;
       background: rgba(255, 255, 255, 0.7);
     }
-    /* NEWS */
     .news {
       padding: 4rem 0;
       background: var(--white);
@@ -662,7 +688,6 @@
       color: rgba(58, 53, 46, 0.6);
       margin-right: 1rem;
     }
-    /* IMAGE BANNER */
     .image-banner {
       padding: 4rem 0;
       background: var(--beige-light);
@@ -674,8 +699,8 @@
       display: grid;
       gap: 1.5rem;
       border: 1px solid rgba(58, 53, 46, 0.08);
+      box-shadow: 0 15px 30px rgba(57, 49, 44, 0.08);
     }
-    /* STUDIO */
     .studio {
       padding: 4rem 0;
     }
@@ -689,7 +714,6 @@
       height: 140px;
       border-radius: 1rem;
     }
-    /* CONTACT + FOOTER */
     footer {
       background: var(--greige);
       color: var(--white);
@@ -713,6 +737,37 @@
       font-size: 0.85rem;
       margin-top: 2rem;
       letter-spacing: 0.05em;
+    }
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    [data-animate].in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes heroGlow {
+      0% { opacity: 0.45; }
+      50% { opacity: 0.9; }
+      100% { opacity: 0.45; }
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero::after,
+      .hero-visual,
+      [data-animate] {
+        animation: none !important;
+        transition: none !important;
+      }
+      [data-animate] {
+        opacity: 1;
+        transform: none;
+      }
     }
     @media (min-width: 768px) {
       .header-inner {
@@ -782,8 +837,7 @@
   </style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header id="site-header">
+  <header id="site-header" data-animate>
     <div class="header-inner container">
       <div class="logo">
         <img src="画像/S__13787165_0.jpg" alt="日本機能的美姿勢協会のロゴ" width="140">
@@ -812,10 +866,9 @@
   </header>
 
   <main>
-    <!-- HERO SECTION -->
     <section id="home" class="hero">
       <div class="container hero-content">
-        <div class="hero-text">
+        <div class="hero-text" data-animate>
           <p class="section-eyebrow">スポーツサークル・アスリートのための姿勢＆からだケア協会</p>
           <h1>怪我を減らし、パフォーマンスを高める機能的美姿勢支援。</h1>
           <p>スポーツサークルや競技チームが抱える「運動時の怪我」「身体の衰え」「パフォーマンス低下」「正確な身体操作」の悩みに、機能的にも見た目も良い姿勢で向き合います。</p>
@@ -825,15 +878,14 @@
             <a class="btn btn-secondary" href="#menu">プログラムを見る</a>
           </div>
         </div>
-        <div class="hero-visual"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="スポーツサークルのメンバーが姿勢指導を受ける様子" loading="lazy"></div>
+        <div class="hero-visual" data-animate><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="スポーツサークルのメンバーが姿勢指導を受ける様子" loading="lazy"></div>
       </div>
       <div class="scroll-indicator">
         <span></span> Scroll
       </div>
     </section>
 
-    <!-- CONCEPT SECTION -->
-    <section id="concept" class="concept-band">
+    <section id="concept" class="concept-band" data-animate>
       <div class="container concept-content">
         <div>
           <p class="section-eyebrow">MISSION</p>
@@ -845,12 +897,11 @@
       </div>
     </section>
 
-    <!-- POINTS SECTION -->
-    <section id="functional-posture" class="points">
+    <section id="functional-posture" class="points" data-animate>
       <div class="container">
         <p class="section-eyebrow">FUNCTIONAL POSTURE</p>
         <div class="points-grid">
-          <div class="point-card">
+          <div class="point-card" data-animate>
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <rect x="3" y="5" width="18" height="16" rx="2"></rect>
@@ -862,7 +913,7 @@
             <h4>スポーツサークル指導実績</h4>
             <p>学生・社会人サークルやアスリートへの姿勢ケアで、怪我予防とパフォーマンス維持を両立。</p>
           </div>
-          <div class="point-card">
+          <div class="point-card" data-animate>
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="8" r="3"></circle>
@@ -872,7 +923,7 @@
             <h4>のべ5万人以上の治療経験</h4>
             <p>臨床と現場で積み上げた実績が、運動時の怪我や身体の衰えに寄り添う根拠になります。</p>
           </div>
-          <div class="point-card">
+          <div class="point-card" data-animate>
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <path d="M12 4v16"></path>
@@ -883,7 +934,7 @@
             <h4>同業者・施術家への指導</h4>
             <p>治療家・トレーナー向け研修で、正確な身体操作と連動性を高める理論を共有。</p>
           </div>
-          <div class="point-card">
+          <div class="point-card" data-animate>
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <path d="M6 9h12v10H6z"></path>
@@ -897,22 +948,20 @@
         </div>
       </div>
     </section>
-
-    <!-- PROGRAMS SECTION -->
-    <section id="menu" class="menu-section">
+    <section id="menu" class="menu-section" data-animate>
       <div class="container">
         <p class="section-eyebrow">PROGRAMS</p>
         <h2 class="section-title">提供プログラム</h2>
         <p>スポーツサークル・アスリート・企業・自治体・施術家まで、目的に合わせて導入しやすいプログラムを設計します。</p>
         <div class="menu-cards">
-          <article class="menu-card">
+          <article class="menu-card" data-animate>
             <div class="image-placeholder"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="団体研修で姿勢講義を受けるスポーツサークル" loading="lazy"></div>
             <h3>団体研修・講座プログラム</h3>
             <p>対象：スポーツサークル／部活動／企業クラブ／自治体イベント</p>
             <p>姿勢評価・講義・実技を組み合わせ、運動時の怪我を減らしながら正確な身体操作を身につけます。筋肉や関節の連動性を高める体操教室、信用金庫などでの健康セミナーにも活用されています。</p>
             <a class="btn btn-secondary" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINEで資料請求</a>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-animate>
             <div class="image-placeholder"><img src="https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="個別セッションで姿勢調整を行うトレーナー" loading="lazy"></div>
             <h3>個人セッション・オンライン講座</h3>
             <p>対象：選手個人／指導者／施術家／遠方チーム</p>
@@ -923,35 +972,35 @@
         <p style="margin-top:1.5rem;">※体操教室や継続伴走プランもご用意しています。人数・目的に応じてカスタマイズ可能です。</p>
       </div>
     </section>
-    <!-- CASE STUDY SECTION -->
-    <section id="case-study" class="case-study">
+
+    <section id="case-study" class="case-study" data-animate>
       <div class="container">
         <p class="section-eyebrow">CASE STUDY</p>
         <h2 class="section-title">導入事例</h2>
         <p>スポーツサークルを中心に、学生・社会人チームや企業の健康推進担当者からもご相談いただいています。</p>
         <div class="case-grid">
-          <article class="case-card">
+          <article class="case-card" data-animate>
             <div class="case-tag">大学サッカー部 / 運動時の怪我</div>
             <h4>怪我を繰り返す選手への姿勢評価プログラム</h4>
-            <p>胸椎の可動性と股関節の連動に着目し、週1回の体操教室を導入。見た目も整える機能的美姿勢が共通言語となり、シーズン後半は離脱者が半減しました。</p>
+            <p>胸椎の可動性と股関節の連動に着目し、週1回の体操教室を導入。機能的美姿勢が共通言語となり、シーズン後半は離脱者が半減しました。</p>
             <a href="#">詳しく読む</a>
           </article>
-          <article class="case-card">
+          <article class="case-card" data-animate>
             <div class="case-tag">社会人バレーボールサークル / 身体の衰え</div>
             <h4>ジャンプ・着地に対応した団体研修</h4>
-            <p>のべ5万人以上の治療実績をもとに、動かせていない筋肉へのアプローチを実施。パフォーマンス低下の不安が解消され、安心して大会に臨めたと評価いただきました。</p>
+            <p>のべ5万人以上の治療実績をもとに、動かせていない筋肉へのアプローチを実施。パフォーマンス低下の不安が解消されました。</p>
             <a href="#">詳しく読む</a>
           </article>
-          <article class="case-card">
+          <article class="case-card" data-animate>
             <div class="case-tag">中学校バスケット部 / 正確な身体操作</div>
             <h4>姿勢と身体操作の基礎講座</h4>
-            <p>オンライン講座と現地実技を組み合わせ、筋肉や関節の連動性を高めるドリルを共有。指導者層の不安を取り除き、チーム全体で取り組める体制を構築しました。</p>
+            <p>オンライン講座と現地実技を組み合わせ、筋肉や関節の連動性を高めるドリルを共有。チーム全体で取り組める体制を構築しました。</p>
             <a href="#">詳しく読む</a>
           </article>
-          <article class="case-card">
+          <article class="case-card" data-animate>
             <div class="case-tag">信用金庫 / デスクワーカー</div>
             <h4>健康セミナーでの体操教室</h4>
-            <p>長時間座ることによる身体の衰えに対応。正確な身体操作を学ぶワークを取り入れ、LINE登録で継続的にセルフケア情報を提供しました。</p>
+            <p>長時間座ることによる身体の衰えに対応。正確な身体操作を学ぶワークを取り入れ、LINE登録でセルフケア情報を提供しました。</p>
             <a href="#">詳しく読む</a>
           </article>
         </div>
@@ -961,8 +1010,7 @@
       </div>
     </section>
 
-    <!-- CTA BAND -->
-    <section class="cta-band">
+    <section class="cta-band" data-animate>
       <div class="container cta-content">
         <div>
           <p class="section-eyebrow" style="color:rgba(255,255,255,0.7);">FOR TEAM LEADERS</p>
@@ -974,15 +1022,13 @@
         </div>
       </div>
     </section>
-
-    <!-- TRAINER SECTION -->
-    <section id="trainer" class="trainer">
+    <section id="trainer" class="trainer" data-animate>
       <div class="container">
         <p class="section-eyebrow">ABOUT</p>
         <h2 class="section-title">協会代表紹介</h2>
         <div class="trainer-main">
-          <div class="trainer-photo"><img src="画像/nakamura.png" alt="日本機能的美姿勢協会 代表 中村一晶" loading="lazy"></div>
-          <div class="trainer-details">
+          <div class="trainer-photo" data-animate><img src="画像/nakamura.png" alt="日本機能的美姿勢協会 代表 中村一晶" loading="lazy"></div>
+          <div class="trainer-details" data-animate>
             <h3>中村 一晶 / Kazumasa Nakamura</h3>
             <p>日本機能的美姿勢協会 代表理事 / 姿勢研究家・トレーナー</p>
             <ul>
@@ -994,14 +1040,14 @@
           </div>
         </div>
         <div class="sub-trainers">
-          <div class="sub-trainer-card">
+          <div class="sub-trainer-card" data-animate>
             <div class="mini-photo"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="サポートコーチの写真" loading="lazy"></div>
             <div>
               <h4>サポートコーチ / 杉山 ひかり</h4>
               <p>スポーツピラティス指導でチーム全体の呼吸・連動性を整える役割を担当。</p>
             </div>
           </div>
-          <div class="sub-trainer-card">
+          <div class="sub-trainer-card" data-animate>
             <div class="mini-photo"><img src="https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="管理栄養士の写真" loading="lazy"></div>
             <div>
               <h4>コンディショニングアドバイザー / 岡田 みゆ</h4>
@@ -1011,8 +1057,8 @@
         </div>
       </div>
     </section>
-    <!-- PRICE SECTION -->
-    <section id="price" class="price">
+
+    <section id="price" class="price" data-animate>
       <div class="container">
         <p class="section-eyebrow">PRICE</p>
         <h2 class="section-title">導入プラン・料金の目安</h2>
@@ -1028,12 +1074,12 @@
           <div>
             <h3>シーズン通期サポート</h3>
             <div class="price-grid-2" style="margin-top:1rem;">
-              <div class="price-card">
+              <div class="price-card" data-animate>
                 <h4>10回パフォーマンス伴走</h4>
                 <p>¥330,000〜</p>
                 <p>シーズン前から本番まで、姿勢評価・団体研修・個別サポートをセット。</p>
               </div>
-              <div class="price-card">
+              <div class="price-card" data-animate>
                 <h4>オンライン併用プラン</h4>
                 <p>¥264,000〜</p>
                 <p>遠征中のチームや遠方サークル向けに、オンライン講座＋現地2回を組み合わせ。</p>
@@ -1043,12 +1089,12 @@
           <div>
             <h3>企業・自治体・施術家向け</h3>
             <div class="price-grid-2" style="margin-top:1rem;">
-              <div class="price-card">
+              <div class="price-card" data-animate>
                 <h4>企業・自治体健康セミナー</h4>
                 <p>¥88,000〜（60分）</p>
                 <p>信用金庫で実施している体操教室をベースに、デスクワーカーの不調に対応。</p>
               </div>
-              <div class="price-card">
+              <div class="price-card" data-animate>
                 <h4>施術家向けベーシック講座</h4>
                 <p>¥44,000〜／人</p>
                 <p>同業者への指導実績を活かし、機能的美姿勢の評価・指導法を共有します。</p>
@@ -1069,8 +1115,7 @@
       </div>
     </section>
 
-    <!-- ACCESS SECTION -->
-    <section id="access" class="access">
+    <section id="access" class="access" data-animate>
       <div class="container">
         <p class="section-eyebrow">ACCESS</p>
         <h2 class="section-title">アクセス</h2>
@@ -1088,7 +1133,7 @@
           </div>
         </div>
         <div class="route-icons">
-          <div class="route-card">
+          <div class="route-card" data-animate>
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <rect x="5" y="4" width="14" height="12" rx="2"></rect>
@@ -1099,7 +1144,7 @@
             </div>
             <div>JR京都駅から快速で20分、城陽駅より徒歩8分</div>
           </div>
-          <div class="route-card">
+          <div class="route-card" data-animate>
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <rect x="4" y="5" width="16" height="11" rx="2"></rect>
@@ -1110,7 +1155,7 @@
             </div>
             <div>近鉄久津川駅から徒歩12分、タクシー5分</div>
           </div>
-          <div class="route-card">
+          <div class="route-card" data-animate>
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <rect x="3" y="7" width="18" height="10" rx="2"></rect>
@@ -1121,7 +1166,7 @@
             </div>
             <div>京都京阪バス「久世橋東」停留所より徒歩1分</div>
           </div>
-          <div class="route-card">
+          <div class="route-card" data-animate>
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <circle cx="7" cy="17" r="2.5"></circle>
@@ -1135,43 +1180,42 @@
         </div>
       </div>
     </section>
-    <!-- Q&A SECTION -->
-    <section id="qa" class="qa">
+    <section id="qa" class="qa" data-animate>
       <div class="container">
         <p class="section-eyebrow">Q&amp;A</p>
         <h2 class="section-title">よくあるご質問</h2>
         <div class="qa-list">
-          <div class="qa-item">
+          <div class="qa-item" data-animate>
             <button class="qa-question">スポーツ経験が少ないメンバーでも効果はありますか？</button>
             <div class="qa-answer">
               <p>はい。正確な身体操作を身につける基礎からスタートし、動かせていない筋肉に気づける内容なので初心者にも取り組みやすい構成です。</p>
             </div>
           </div>
-          <div class="qa-item">
+          <div class="qa-item" data-animate>
             <button class="qa-question">オンラインだけでの講座実施は可能ですか？</button>
             <div class="qa-answer">
               <p>可能です。LINEでの事前ヒアリングとオンライン講座を組み合わせ、動画フィードバックにも対応しています。</p>
             </div>
           </div>
-          <div class="qa-item">
+          <div class="qa-item" data-animate>
             <button class="qa-question">料金はどのように決まりますか？</button>
             <div class="qa-answer">
               <p>チーム人数・目的・開催回数・移動距離によってお見積りします。まずはLINEにてご要望をお聞かせください。</p>
             </div>
           </div>
-          <div class="qa-item">
+          <div class="qa-item" data-animate>
             <button class="qa-question">施術家1人でも受講できますか？</button>
             <div class="qa-answer">
               <p>はい。個人セッションやオンライン講座をご用意しております。同業者への指導実績を活かしてカリキュラムを組み立てます。</p>
             </div>
           </div>
-          <div class="qa-item">
+          <div class="qa-item" data-animate>
             <button class="qa-question">企業の福利厚生として相談することはできますか？</button>
             <div class="qa-answer">
               <p>健康セミナーや体操教室を導入いただいております。人事・福利厚生担当の方からのご相談も増えています。</p>
             </div>
           </div>
-          <div class="qa-item">
+          <div class="qa-item" data-animate>
             <button class="qa-question">どのくらい前に予約すればいいですか？</button>
             <div class="qa-answer">
               <p>希望日時の1〜2か月前にLINEでご相談いただけると、会場や講師の調整がスムーズです。直前でもできる限り調整いたします。</p>
@@ -1182,8 +1226,7 @@
       </div>
     </section>
 
-    <!-- FLOW SECTION -->
-    <section id="trial-flow" class="trial-flow">
+    <section id="trial-flow" class="trial-flow" data-animate>
       <div class="container">
         <p class="section-eyebrow">FLOW</p>
         <h2 class="section-title">導入までの流れ</h2>
@@ -1260,19 +1303,19 @@
           </article>
         </div>
         <div class="booking-points">
-          <article class="booking-point">
+          <article class="booking-point" data-animate>
             <div class="point-label">POINT 01</div>
             <h4>日程調整はLINEで完結</h4>
             <p>LINEメッセージで候補日を共有できるため、忙しい指導者でもスムーズに予約できます。</p>
             <div class="image-placeholder"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="日程を調整するカレンダー画面" loading="lazy"></div>
           </article>
-          <article class="booking-point">
+          <article class="booking-point" data-animate>
             <div class="point-label">POINT 02</div>
             <h4>資料・動画をいつでも閲覧</h4>
             <p>オンライン講座や体操教室の記録を共有し、必要なときに復習できます。</p>
             <div class="image-placeholder"><img src="https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="共有資料を閲覧するノートパソコン" loading="lazy"></div>
           </article>
-          <article class="booking-point">
+          <article class="booking-point" data-animate>
             <div class="point-label">POINT 03</div>
             <h4>全国どこからでも導入可能</h4>
             <p>オンライン講座と現地サポートを組み合わせ、遠方チームや海外の学生にも対応します。</p>
@@ -1281,9 +1324,7 @@
         </div>
       </div>
     </section>
-
-    <!-- NEWS SECTION -->
-    <section id="news" class="news">
+    <section id="news" class="news" data-animate>
       <div class="container">
         <p class="section-eyebrow">NEWS</p>
         <h2 class="section-title">お知らせ・活動レポート</h2>
@@ -1308,8 +1349,8 @@
         <p style="margin-top:1rem;"><a href="#">お知らせ一覧を見る</a></p>
       </div>
     </section>
-    <!-- IMAGE BANNER -->
-    <section class="image-banner">
+
+    <section class="image-banner" data-animate>
       <div class="container">
         <div class="banner-content">
           <div class="image-placeholder" style="height:300px;"><img src="https://images.unsplash.com/photo-1549576490-b0b4831ef60a?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="オンライン講座の撮影現場" loading="lazy"></div>
@@ -1323,8 +1364,7 @@
       </div>
     </section>
 
-    <!-- STUDIO SECTION -->
-    <section id="studio" class="studio">
+    <section id="studio" class="studio" data-animate>
       <div class="container">
         <p class="section-eyebrow">GALLERY</p>
         <h2 class="section-title">活動ギャラリー</h2>
@@ -1343,8 +1383,7 @@
     </section>
   </main>
 
-  <!-- CONTACT & FOOTER -->
-  <footer id="contact">
+  <footer id="contact" data-animate>
     <div class="container contact-footer">
       <div>
         <p class="section-eyebrow" style="color:rgba(255,255,255,0.7);">CONTACT</p>
@@ -1396,6 +1435,23 @@
         tabPanels.forEach(panel => panel.classList.toggle('active', panel.id === target));
       });
     });
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const animatedElements = document.querySelectorAll('[data-animate]');
+
+    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      animatedElements.forEach(element => observer.observe(element));
+    } else {
+      animatedElements.forEach(element => element.classList.add('in-view'));
+    }
   </script>
 </body>
 </html>
