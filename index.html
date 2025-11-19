@@ -369,9 +369,11 @@
       box-shadow: var(--shadow-soft);
       border: 1px solid rgba(227, 192, 138, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      transform-origin: center;
     }
     .point-card:hover {
-      transform: translateY(-4px);
+      transform: translate3d(0, -4px, 0) rotateX(3deg);
       box-shadow: 0 24px 45px rgba(0,0,0,0.08);
     }
     .point-icon {
@@ -408,15 +410,18 @@
       flex-direction: column;
       gap: 1.2rem;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      transform-origin: center;
     }
     .menu-card:hover {
-      transform: translateY(-4px);
+      transform: translate3d(0, -4px, 0) rotateX(3deg);
       box-shadow: 0 24px 45px rgba(0,0,0,0.08);
     }
     .case-grid {
       display: grid;
       gap: 1.5rem;
       margin-top: 2rem;
+      position: relative;
     }
     .case-card {
       background: var(--card-bg);
@@ -428,9 +433,11 @@
       flex-direction: column;
       gap: 0.8rem;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      transform-origin: center;
     }
     .case-card:hover {
-      transform: translateY(-4px);
+      transform: translate3d(0, -4px, 0) rotateX(3deg);
       box-shadow: 0 24px 45px rgba(0,0,0,0.08);
     }
     .case-tag {
@@ -448,6 +455,7 @@
       overflow: hidden;
       border: 1px solid rgba(227, 192, 138, 0.3);
       padding: clamp(2.5rem, 5vw, 4rem) 0;
+      position: relative;
     }
     .cta-content {
       display: grid;
@@ -460,26 +468,31 @@
       margin-top: 2rem;
     }
     .trainer-photo {
-      width: 260px;
-      max-width: 75vw;
+      width: 180px;
+      max-width: 65vw;
       border-radius: 50%;
       background: rgba(227, 192, 138, 0.15);
       overflow: hidden;
-      box-shadow: 0 24px 42px rgba(0,0,0,0.12);
+      box-shadow: 0 18px 32px rgba(0,0,0,0.1);
       margin: 0 auto;
-      border: 4px solid var(--card-bg);
+      border: 3px solid var(--card-bg);
     }
     .trainer-details h3 {
       margin: 0;
-      font-size: 1.7rem;
+      font-size: 1.4rem;
       color: var(--ink);
     }
     .trainer-details h3 span {
       display: block;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       letter-spacing: 0.12em;
       color: var(--gold-beige);
       margin-top: 0.3rem;
+    }
+    .trainer-details .role {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin: 0.3rem 0 1rem;
     }
     .trainer-details ul {
       padding-left: 1.4rem;
@@ -799,6 +812,243 @@
       50% { transform: translate3d(6px, -6px, 0); }
       100% { transform: translate3d(-6px, 4px, 0); }
     }
+
+    /* ========= HERO バブルアニメーション ========= */
+    .hero-visual::before,
+    .hero-visual::after {
+      will-change: transform;
+    }
+    .hero-visual::before {
+      animation: heroBubble 18s ease-in-out infinite;
+    }
+    .hero-visual::after {
+      animation: heroBubbleReverse 22s ease-in-out infinite;
+    }
+    @keyframes heroBubble {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(-24px, 12px, 0) scale(1.06);
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+    @keyframes heroBubbleReverse {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(18px, -16px, 0) scale(0.96);
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+    .hero-parallax {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .hero-parallax-orbit {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 20%, rgba(227,192,138,0.6), transparent 60%),
+                  radial-gradient(circle at 80% 80%, rgba(227,192,138,0.3), transparent 60%);
+      opacity: 0.22;
+      filter: blur(1px);
+      transition: transform 0.4s ease-out;
+    }
+    .hero-parallax-orbit--1 {
+      top: 12%;
+      left: -40px;
+    }
+    .hero-parallax-orbit--2 {
+      bottom: 8%;
+      right: -30px;
+    }
+
+    /* ========= CONCEPT 装飾の浮遊アニメ ========= */
+    .concept-content .image-placeholder::before {
+      content: '';
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(227,192,138,0.4), transparent 70%);
+      top: -30px;
+      right: -30px;
+      animation: aboutOrb 9s ease-in-out infinite;
+      transform-origin: 50% 50%;
+    }
+    .concept-content .image-placeholder::after {
+      content: '';
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(227,192,138,0.3), transparent 70%);
+      bottom: -20px;
+      left: -20px;
+      animation: aboutOrbReverse 11s ease-in-out infinite;
+      transform-origin: 50% 50%;
+    }
+    .concept-content .image-placeholder {
+      position: relative;
+    }
+    @keyframes aboutOrb {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      }
+      50% {
+        transform: translate3d(10px, -6px, 0) scale(1.04) rotate(3deg);
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      }
+    }
+    @keyframes aboutOrbReverse {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      }
+      50% {
+        transform: translate3d(-8px, 10px, 0) scale(0.97) rotate(-2deg);
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      }
+    }
+
+    /* ========= スクロールフェードアップ共通 ========= */
+    .js-fade-up {
+      opacity: 0;
+      transform: translate3d(0, 40px, 0);
+      filter: blur(4px);
+      transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+    }
+    .js-fade-up.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      filter: blur(0);
+    }
+    .js-fade-up[data-delay="1"] {
+      transition-delay: 0.1s;
+    }
+    .js-fade-up[data-delay="2"] {
+      transition-delay: 0.2s;
+    }
+    .js-fade-up[data-delay="3"] {
+      transition-delay: 0.3s;
+    }
+
+    /* ========= CASE STUDY タイムライン ========= */
+    .case-grid::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 0;
+      width: 2px;
+      height: 0;
+      background: linear-gradient(to bottom, rgba(227,192,138,0.9), rgba(227,192,138,0.2));
+      border-radius: 999px;
+    }
+    .case-grid.timeline-active::before {
+      animation: worksLine 1.4s ease-out forwards;
+    }
+    @keyframes worksLine {
+      0% {
+        height: 0;
+      }
+      100% {
+        height: 100%;
+      }
+    }
+    .case-card {
+      position: relative;
+      padding-left: 40px;
+    }
+    .case-card::before {
+      content: '';
+      position: absolute;
+      left: 1px;
+      top: 26px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 2px solid var(--gold-beige);
+      background: #fff;
+    }
+    .case-card.js-fade-up {
+      transform: translate3d(-24px, 40px, 0);
+    }
+    .case-card.js-fade-up.is-visible {
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* ========= CTA グラデーションフロー ========= */
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: conic-gradient(
+        from 180deg,
+        rgba(255,255,255,0.0),
+        rgba(227,192,138,0.4),
+        rgba(255,255,255,0.0),
+        rgba(227,192,138,0.2),
+        rgba(255,255,255,0.0)
+      );
+      opacity: 0.6;
+      animation: contactGlow 14s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes contactGlow {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ========= CTA ボタンのライトグロー ========= */
+    .cta-band .btn-primary {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .cta-band .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -30%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0.7),
+        rgba(255,255,255,0)
+      );
+      transform: translate3d(-100%, 0, 0) skewX(-20deg);
+      opacity: 0;
+    }
+    .cta-band .btn-primary:hover::before {
+      animation: buttonShine 0.9s ease-out;
+      opacity: 1;
+    }
+    @keyframes buttonShine {
+      0% {
+        transform: translate3d(-120%, 0, 0) skewX(-20deg);
+      }
+      100% {
+        transform: translate3d(220%, 0, 0) skewX(-20deg);
+      }
+    }
+
     @media (max-width: 767px) {
       .logo span {
         font-size: 0.85rem;
@@ -809,6 +1059,18 @@
       }
       .header-inner {
         max-height: 70px;
+      }
+      .trainer-photo {
+        width: 150px;
+      }
+      .case-grid::before {
+        display: none;
+      }
+      .case-card {
+        padding-left: 0;
+      }
+      .case-card::before {
+        display: none;
       }
     }
     @media (min-width: 768px) {
@@ -926,6 +1188,10 @@
           </div>
         </div>
       </div>
+      <div class="hero-parallax">
+        <div class="hero-parallax-orbit hero-parallax-orbit--1"></div>
+        <div class="hero-parallax-orbit hero-parallax-orbit--2"></div>
+      </div>
       <div class="container">
         <div class="scroll-indicator" aria-hidden="true">
           <span></span>Scroll
@@ -935,13 +1201,13 @@
     <!-- CONCEPT SECTION -->
     <section id="concept" class="concept-band" data-animate>
       <div class="container concept-content">
-        <div>
+        <div class="js-fade-up" data-delay="0">
           <p class="section-eyebrow">MISSION</p>
           <h2 class="section-title">姿勢の研究をスポーツ現場へ循環させる。</h2>
           <p>日本機能的美姿勢協会は、姿勢の重要性の認知と研究を軸に、スポーツサークル・メディア・自治体・学生・施術家まで幅広い皆さまと協働しています。見た目と機能美を兼ね備えた姿勢づくり、動かせていない筋肉へのアプローチ、筋肉や関節の連動性を高めるメソッドを、確かなデータと実践で届けます。</p>
           <p>のべ5万人以上の治療・指導から得た知見をベースに、信用金庫での健康セミナーや同業者への講師実績など、公的な場でも信頼を重ねています。スポーツサークルや企業のクラブ活動が「ここなら相談したい」と思える安心感を、LINE登録から体験してください。</p>
         </div>
-        <div class="image-placeholder">
+        <div class="image-placeholder js-fade-up" data-delay="1">
           <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=1200&q=80" alt="姿勢研究を共有するカンファレンスの様子" loading="lazy">
         </div>
       </div>
@@ -953,7 +1219,7 @@
         <p class="section-eyebrow">Functional Posture</p>
         <h2 class="section-title">選ばれる理由</h2>
         <div class="points-grid">
-          <article class="point-card">
+          <article class="point-card js-fade-up" data-delay="0">
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <rect x="3" y="5" width="18" height="16" rx="2"></rect>
@@ -965,7 +1231,7 @@
             <h4>スポーツサークル・チーム指導</h4>
             <p>学生・社会人サークル、企業クラブ活動まで競技特性に応じた姿勢介入を設計します。</p>
           </article>
-          <article class="point-card">
+          <article class="point-card js-fade-up" data-delay="1">
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="7" r="3"></circle>
@@ -975,7 +1241,7 @@
             <h4>のべ5万人以上の治療・指導経験</h4>
             <p>運動時の怪我や身体の衰えに寄り添い、姿勢評価からケアまでワンストップで伴走。</p>
           </article>
-          <article class="point-card">
+          <article class="point-card js-fade-up" data-delay="2">
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <path d="M4 12h16"></path>
@@ -986,7 +1252,7 @@
             <h4>同業者・施術家への教育</h4>
             <p>動かせていない筋肉の使い方や関節の連動性をテーマに、治療家向け講座も開催。</p>
           </article>
-          <article class="point-card">
+          <article class="point-card js-fade-up" data-delay="3">
             <div class="point-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <path d="M6 3h12v18H6z"></path>
@@ -1007,7 +1273,7 @@
         <h2 class="section-title">提供メニュー</h2>
         <p>スポーツサークル・企業・自治体・施術家向けに、相談内容と人数に応じたカスタムプログラムをご提案します。</p>
         <div class="menu-cards">
-          <article class="menu-card">
+          <article class="menu-card js-fade-up" data-delay="0">
             <div class="image-placeholder" style="height:240px;">
               <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80" alt="スポーツチーム向け団体講座の様子" loading="lazy">
             </div>
@@ -1016,7 +1282,7 @@
             <p>姿勢評価、機能的美姿勢レクチャー、体操教室、オンラインフォローを組み合わせ、チーム単位で「正確な身体操作」を共通言語にします。運動時の怪我を減らしたい指導者に最適です。</p>
             <a class="btn btn-secondary" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINEで資料請求</a>
           </article>
-          <article class="menu-card">
+          <article class="menu-card js-fade-up" data-delay="1">
             <div class="image-placeholder" style="height:240px;">
               <img src="https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?auto=format&fit=crop&w=1200&q=80" alt="オンライン講座で指導を受けるアスリート" loading="lazy">
             </div>
@@ -1037,25 +1303,25 @@
         <h2 class="section-title">導入事例</h2>
         <p>スポーツサークル・企業・学校・信用金庫など、多様な現場で成果を重ねています。</p>
         <div class="case-grid">
-          <article class="case-card">
+          <article class="case-card js-fade-up" data-delay="0">
             <div class="case-tag">大学サッカー部 / 運動時の怪我</div>
             <h4>90分ウォームアップ講座で肉離れリスクを低減</h4>
             <p>筋肉と関節の連動性を高めるドリルを導入し、シーズン後半の負傷離脱者が前年比25%減。正確な身体操作を共有できたことで、ゲーム中の判断も向上しました。</p>
             <a href="#">詳しく読む</a>
           </article>
-          <article class="case-card">
+          <article class="case-card js-fade-up" data-delay="1">
             <div class="case-tag">社会人バレーボール / 身体の衰え</div>
             <h4>ジャンプ・着地動作の再教育で腰の負担を軽減</h4>
             <p>のべ5万人の治療実績をもとに、動かせていない筋肉を意識化。1か月で腰痛の訴えが半数以下となり、パフォーマンス維持への手応えを実感されています。</p>
             <a href="#">詳しく読む</a>
           </article>
-          <article class="case-card">
+          <article class="case-card js-fade-up" data-delay="2">
             <div class="case-tag">中学校バスケ部 / 正確な身体操作</div>
             <h4>姿勢と言語化のワークで基礎動作を共有</h4>
             <p>「見た目と機能美」を両立する姿勢をカード化し、選手同士でチェック。コーチの指示が伝わりやすくなり、県大会ベスト8に進出しました。</p>
             <a href="#">詳しく読む</a>
           </article>
-          <article class="case-card">
+          <article class="case-card js-fade-up" data-delay="3">
             <div class="case-tag">信用金庫セミナー / デスクワーカー</div>
             <h4>オンライン体操教室で肩こり改善をサポート</h4>
             <p>社員の身体の衰えとテレワーク疲労に対応。姿勢計測アプリとLINEサポートを組み合わせ、継続率90%超の健康施策として評価されています。</p>
@@ -1318,7 +1584,7 @@
         <div class="tab-panels">
           <div class="tab-panel active" id="first-timers">
             <div class="flow-steps">
-              <article class="flow-step">
+              <article class="flow-step js-fade-up" data-delay="0">
                 <div>
                   <p class="step-label">STEP 01</p>
                   <h3>LINEで相談・ヒアリング予約</h3>
@@ -1328,7 +1594,7 @@
                   <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="LINE相談のイメージ" loading="lazy">
                 </div>
               </article>
-              <article class="flow-step">
+              <article class="flow-step js-fade-up" data-delay="1">
                 <div>
                   <p class="step-label">STEP 02</p>
                   <h3>オンラインまたは対面ヒアリング</h3>
@@ -1338,7 +1604,7 @@
                   <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=80" alt="ヒアリングの様子" loading="lazy">
                 </div>
               </article>
-              <article class="flow-step">
+              <article class="flow-step js-fade-up" data-delay="2">
                 <div>
                   <p class="step-label">STEP 03</p>
                   <h3>プログラム提案・お見積り</h3>
@@ -1348,7 +1614,7 @@
                   <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="プログラム資料の確認" loading="lazy">
                 </div>
               </article>
-              <article class="flow-step">
+              <article class="flow-step js-fade-up" data-delay="3">
                 <div>
                   <p class="step-label">STEP 04</p>
                   <h3>当日の研修・講座実施</h3>
@@ -1358,7 +1624,7 @@
                   <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=800&q=80" alt="トレーニング講座の様子" loading="lazy">
                 </div>
               </article>
-              <article class="flow-step">
+              <article class="flow-step js-fade-up" data-delay="0">
                 <div>
                   <p class="step-label">STEP 05</p>
                   <h3>アフターフォロー・継続サポート</h3>
@@ -1542,6 +1808,79 @@
     }, { threshold: 0.2 });
 
     animateItems.forEach(item => observer.observe(item));
+
+    // ========================================
+    // HERO マウスパララックス
+    // ========================================
+    const hero = document.querySelector('.hero');
+    const heroOrbits = document.querySelectorAll('.hero-parallax-orbit');
+
+    if (hero && heroOrbits.length) {
+      hero.addEventListener('mousemove', (event) => {
+        const rect = hero.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+        heroOrbits.forEach((orbit, index) => {
+          const strength = 18 + index * 10;
+          const translateX = -x * strength;
+          const translateY = -y * strength;
+          orbit.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
+        });
+      });
+
+      hero.addEventListener('mouseleave', () => {
+        heroOrbits.forEach((orbit) => {
+          orbit.style.transform = 'translate3d(0, 0, 0)';
+        });
+      });
+    }
+
+    // ========================================
+    // スクロールフェードアップ（共通）
+    // ========================================
+    const fadeTargets = document.querySelectorAll('.js-fade-up');
+
+    if ('IntersectionObserver' in window && fadeTargets.length) {
+      const fadeObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.2
+        }
+      );
+
+      fadeTargets.forEach((target) => fadeObserver.observe(target));
+    }
+
+    // ========================================
+    // CASE STUDY タイムライン線の描画
+    // ========================================
+    const caseGrid = document.querySelector('.case-grid');
+
+    if ('IntersectionObserver' in window && caseGrid) {
+      const caseObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              caseGrid.classList.add('timeline-active');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.2
+        }
+      );
+
+      caseObserver.observe(caseGrid);
+    }
   </script>
 </body>
 </html>
