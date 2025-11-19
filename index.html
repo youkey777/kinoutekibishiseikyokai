@@ -78,6 +78,7 @@
       letter-spacing: 0.04em;
       color: var(--ink);
       font-weight: 700;
+      animation: softFadeUp 1s ease-out;
     }
     .section-title::after {
       content: "";
@@ -86,6 +87,16 @@
       height: 4px;
       background: linear-gradient(90deg, var(--gold-beige), transparent);
       margin-top: 0.8rem;
+    }
+    @keyframes softFadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
     header {
       position: sticky;
@@ -189,23 +200,24 @@
     }
     .primary-cta {
       padding: 0.8rem 1.6rem;
-      background: linear-gradient(135deg, var(--ink), var(--gold-beige));
-      color: #FFF;
+      background: rgba(227, 192, 138, 0.15);
+      color: var(--ink);
       border-radius: 999px;
       letter-spacing: 0.08em;
       font-size: 0.9rem;
-      border: none;
-      box-shadow: 0 12px 25px rgba(0,0,0,0.16);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 2px solid var(--gold-beige);
+      box-shadow: 0 4px 12px rgba(227, 192, 138, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       white-space: nowrap;
       font-weight: 600;
     }
     .primary-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 32px rgba(0,0,0,0.22);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(227, 192, 138, 0.25);
+      background: rgba(227, 192, 138, 0.25);
     }
     .hero {
-      padding: clamp(5rem, 10vw, 8rem) 0 4.5rem;
+      padding: clamp(1.5rem, 3vw, 2.5rem) 0 2rem;
       background:
         radial-gradient(circle at 10% 20%, rgba(227,192,138,0.28), transparent 55%),
         radial-gradient(circle at 90% 80%, rgba(26,23,21,0.06), transparent 50%),
@@ -262,14 +274,15 @@
       font-weight: 600;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--ink), var(--gold-beige));
-      color: #FFF;
-      box-shadow: 0 12px 25px rgba(0,0,0,0.16);
-      border: none;
+      background: rgba(227, 192, 138, 0.15);
+      color: var(--ink);
+      box-shadow: 0 4px 12px rgba(227, 192, 138, 0.15);
+      border: 2px solid var(--gold-beige);
     }
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 32px rgba(0,0,0,0.22);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(227, 192, 138, 0.25);
+      background: rgba(227, 192, 138, 0.25);
     }
     .btn-secondary {
       border: 2px solid var(--gold-beige);
@@ -371,10 +384,28 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       transform-style: preserve-3d;
       transform-origin: center;
+      animation: cardPop 0.6s ease-out backwards;
     }
+    .point-card:nth-child(1) { animation-delay: 0.1s; }
+    .point-card:nth-child(2) { animation-delay: 0.2s; }
+    .point-card:nth-child(3) { animation-delay: 0.3s; }
+    .point-card:nth-child(4) { animation-delay: 0.4s; }
     .point-card:hover {
       transform: translate3d(0, -4px, 0) rotateX(3deg);
       box-shadow: 0 24px 45px rgba(0,0,0,0.08);
+    }
+    @keyframes cardPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.7) translateY(20px);
+      }
+      60% {
+        transform: scale(1.05) translateY(-5px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
     .point-icon {
       width: 68px;
@@ -689,6 +720,22 @@
       background: var(--card-bg);
       border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
+      animation: flowSlideIn 0.7s ease-out backwards;
+    }
+    .flow-step:nth-child(1) { animation-delay: 0s; }
+    .flow-step:nth-child(2) { animation-delay: 0.15s; }
+    .flow-step:nth-child(3) { animation-delay: 0.3s; }
+    .flow-step:nth-child(4) { animation-delay: 0.45s; }
+    .flow-step:nth-child(5) { animation-delay: 0.6s; }
+    @keyframes flowSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-80px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
     .step-label {
       font-size: 0.8rem;
@@ -813,6 +860,21 @@
       100% { transform: translate3d(-6px, 4px, 0); }
     }
 
+    /* ========= 新規アニメーション: HERO下からフワッと浮上 ========= */
+    .hero-text {
+      animation: heroFadeUp 1.2s ease-out forwards;
+    }
+    @keyframes heroFadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(60px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     /* ========= HERO バブルアニメーション ========= */
     .hero-visual::before,
     .hero-visual::after {
@@ -871,54 +933,85 @@
       right: -30px;
     }
 
-    /* ========= CONCEPT 装飾の浮遊アニメ ========= */
+    /* ========= CONCEPT セクション背景の幾何学ライン ========= */
+    .concept-band {
+      position: relative;
+      overflow: hidden;
+    }
+    .concept-band::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: -10%;
+      width: 0;
+      height: 0;
+      border-left: 200px solid transparent;
+      border-right: 200px solid transparent;
+      border-bottom: 350px solid rgba(227, 192, 138, 0.08);
+      animation: triangleDash 3s ease-out forwards;
+      opacity: 0;
+    }
+    .concept-band::after {
+      content: '';
+      position: absolute;
+      bottom: -15%;
+      right: -5%;
+      width: 0;
+      height: 0;
+      border-left: 180px solid transparent;
+      border-right: 180px solid transparent;
+      border-top: 320px solid rgba(227, 192, 138, 0.06);
+      animation: triangleDash 3s 0.3s ease-out forwards;
+      opacity: 0;
+    }
+    @keyframes triangleDash {
+      0% {
+        opacity: 0;
+        transform: translateX(-100px) rotate(-5deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+      }
+    }
+
+    /* ========= CONCEPT 装飾の浮遊アニメ + 画像左スライドイン ========= */
+    .concept-content .image-placeholder {
+      position: relative;
+      overflow: hidden;
+    }
     .concept-content .image-placeholder::before {
       content: '';
       position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(227,192,138,0.4), transparent 70%);
-      top: -30px;
-      right: -30px;
-      animation: aboutOrb 9s ease-in-out infinite;
-      transform-origin: 50% 50%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gold-beige);
+      z-index: 2;
+      animation: blockSlideOut 1.2s ease-out forwards;
     }
-    .concept-content .image-placeholder::after {
-      content: '';
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(227,192,138,0.3), transparent 70%);
-      bottom: -20px;
-      left: -20px;
-      animation: aboutOrbReverse 11s ease-in-out infinite;
-      transform-origin: 50% 50%;
+    .concept-content .image-placeholder img {
+      animation: imageSlideIn 1.2s 0.3s ease-out forwards;
+      opacity: 0;
+      transform: translateX(-30px);
     }
-    .concept-content .image-placeholder {
-      position: relative;
-    }
-    @keyframes aboutOrb {
+    @keyframes blockSlideOut {
       0% {
-        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-      }
-      50% {
-        transform: translate3d(10px, -6px, 0) scale(1.04) rotate(3deg);
+        transform: translateX(0);
       }
       100% {
-        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+        transform: translateX(100%);
       }
     }
-    @keyframes aboutOrbReverse {
+    @keyframes imageSlideIn {
       0% {
-        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-      }
-      50% {
-        transform: translate3d(-8px, 10px, 0) scale(0.97) rotate(-2deg);
+        opacity: 0;
+        transform: translateX(-30px);
       }
       100% {
-        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+        opacity: 1;
+        transform: translateX(0);
       }
     }
 
@@ -1172,9 +1265,8 @@
       <div class="container hero-content">
         <div class="hero-text" data-animate>
           <p class="section-eyebrow">Sports Circle &amp; Athlete Support</p>
-          <h1>怪我を減らし、パフォーマンスを底上げする機能的美姿勢へ。</h1>
-          <p>スポーツサークル・アスリート・指導者のみなさまが抱える運動時の怪我、身体の衰え、パフォーマンス低下、正確な身体操作の悩みに寄り添います。機能的にも見た目にも美しい姿勢を通じて、年齢や競技レベルを超えたチームの未来をつくります。</p>
-          <p>姿勢の重要性を研究し続ける専門家が、個人セッション・団体研修・オンライン講座・体操教室まで幅広く提供。LINEでいつでも相談できる伴走パートナーとして、スポーツサークルや企業クラブ活動、施術家の学び直しにも応えます。</p>
+          <h1>怪我を減らし、パフォーマンスを上げる。</h1>
+          <p>スポーツサークル・アスリート・指導者の運動時の怪我、身体の衰え、パフォーマンス低下に寄り添います。機能的にも美しい姿勢を通じて、個人セッション・団体研修・オンライン講座まで幅広く提供。LINEでいつでも相談できます。</p>
           <div class="hero-buttons">
             <a class="btn btn-primary" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINEで相談する</a>
             <a class="btn btn-secondary" href="#menu">プログラムを見る</a>
