@@ -273,6 +273,20 @@
       transform: translateY(-4px);
       box-shadow: 0 24px 45px rgba(0,0,0,0.08);
     }
+    .news-card:target {
+      animation: highlightPulse 1.5s ease-out;
+      box-shadow: 0 0 0 4px rgba(227, 192, 138, 0.3);
+    }
+    @keyframes highlightPulse {
+      0% {
+        background-color: rgba(227, 192, 138, 0.2);
+        transform: scale(1.02);
+      }
+      100% {
+        background-color: var(--card-bg);
+        transform: scale(1);
+      }
+    }
     .news-header {
       display: flex;
       align-items: center;
@@ -474,7 +488,7 @@
     <section style="background: var(--base-bg);">
       <div class="container">
         <div class="news-grid">
-          <article class="news-card">
+          <article class="news-card" id="news-20250214">
             <div class="news-header">
               <span class="news-date">2025.02.14</span>
               <span class="news-category">活動レポート</span>
@@ -483,7 +497,7 @@
             <p>京都の信用金庫様にて、デスクワーカーの肩こり・身体の衰え対策を中心としたオンライン体操教室を開催。120名が参加し、参加者の85%が「肩こりが軽減した」と回答。在宅勤務者も含め、全国から参加いただきました。座りっぱなし対策ストレッチと姿勢改善エクササイズを中心に、企業の健康経営施策として高い評価を得ました。</p>
           </article>
 
-          <article class="news-card">
+          <article class="news-card" id="news-20250128">
             <div class="news-header">
               <span class="news-date">2025.01.28</span>
               <span class="news-category">お知らせ</span>
