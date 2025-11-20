@@ -568,6 +568,29 @@
       text-transform: uppercase;
       font-weight: 600;
     }
+    .case-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--gold-beige);
+      font-weight: 500;
+      margin-top: 0.5rem;
+      transition: gap 0.2s ease, color 0.2s ease;
+    }
+    .case-link:hover {
+      gap: 0.6rem;
+      color: var(--ink);
+    }
+    .case-link svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
     .cta-band {
       background: linear-gradient(135deg, rgba(245, 228, 200, 0.5), rgba(227, 192, 138, 0.3));
       color: var(--ink);
@@ -1345,7 +1368,6 @@
             </div>
             <h3>団体研修・講座プログラム</h3>
             <p>スポーツサークル・企業クラブ・自治体イベント向け。姿勢評価と体操教室を組み合わせ、チーム単位で「正確な身体操作」を共通言語にします。</p>
-            <a class="btn btn-secondary" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINEで資料請求</a>
           </article>
           <article class="menu-card js-fade-up" data-delay="1">
             <div class="image-placeholder" style="height:240px;">
@@ -1353,7 +1375,6 @@
             </div>
             <h3>個人セッション・オンライン講座</h3>
             <p>選手個人・コーチ・施術家向け。動かせていない筋肉を可視化する姿勢解析と、オンラインでの継続アドバイスをサポート。</p>
-            <a class="btn btn-secondary" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINEで個別相談</a>
           </article>
         </div>
         <div style="text-align:center; margin-top:2rem;">
@@ -1373,13 +1394,25 @@
             <div class="case-tag">大学サッカー部 / 運動時の怪我</div>
             <h4>90分ウォームアップ講座で肉離れリスクを低減</h4>
             <p>筋肉と関節の連動性を高めるドリルを導入し、シーズン後半の負傷離脱者が前年比25%減。</p>
-            <a class="btn btn-secondary" href="cases.html">詳しく読む</a>
+            <a class="case-link" href="cases.html">
+              詳しく読む
+              <svg viewBox="0 0 24 24">
+                <path d="M5 12h14"></path>
+                <path d="M12 5l7 7-7 7"></path>
+              </svg>
+            </a>
           </article>
           <article class="case-card js-fade-up" data-delay="1">
             <div class="case-tag">社会人バレーボール / 身体の衰え</div>
             <h4>ジャンプ・着地動作の再教育で腰の負担を軽減</h4>
             <p>のべ5万人の治療実績をもとに、動かせていない筋肉を意識化。1か月で腰痛の訴えが半数以下に。</p>
-            <a class="btn btn-secondary" href="cases.html">詳しく読む</a>
+            <a class="case-link" href="cases.html">
+              詳しく読む
+              <svg viewBox="0 0 24 24">
+                <path d="M5 12h14"></path>
+                <path d="M12 5l7 7-7 7"></path>
+              </svg>
+            </a>
           </article>
         </div>
         <div style="text-align:center; margin-top:2rem;">
