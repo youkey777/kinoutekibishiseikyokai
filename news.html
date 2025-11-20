@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お知らせ・活動レポート | 日本機能的美姿勢協会</title>
+  <style>
+    :root {
+      --base-bg: #FDFBF8;
+      --card-bg: #FFFFFF;
+      --gold-beige: #E3C08A;
+      --gold-beige-light: #F5E4C8;
+      --ink: #1A1715;
+      --text-main: #332B25;
+      --text-muted: #6B635C;
+      --line: rgba(0,0,0,0.06);
+      --shadow-soft: 0 18px 35px rgba(0,0,0,0.04);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--base-bg);
+      color: var(--text-main);
+      line-height: 1.8;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    a {
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+    a:hover {
+      color: var(--gold-beige);
+    }
+    section a {
+      color: var(--ink);
+    }
+    section a:hover {
+      color: var(--gold-beige);
+    }
+    button {
+      font-family: inherit;
+    }
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+    section {
+      position: relative;
+      padding-block: clamp(36px, 5vw, 74px);
+    }
+    .section-eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.42em;
+      color: var(--gold-beige);
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 500;
+    }
+    .section-eyebrow::before {
+      content: "";
+      width: 20px;
+      height: 1px;
+      background: var(--gold-beige);
+      display: inline-block;
+    }
+    .section-title {
+      position: relative;
+      font-size: clamp(1.8rem, 2.4vw, 2.3rem);
+      margin: 0.6rem 0 1.3rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      font-weight: 700;
+      animation: softFadeUp 1s ease-out;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold-beige), transparent);
+      margin-top: 0.8rem;
+    }
+    @keyframes softFadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(253, 251, 248, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    header.scrolled {
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    }
+    .header-inner {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem;
+      max-height: 80px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      color: var(--ink);
+    }
+    .logo span {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      writing-mode: horizontal-tb;
+    }
+    .logo img {
+      width: auto;
+      height: 50px;
+      max-width: 160px;
+      object-fit: contain;
+    }
+    nav {
+      position: relative;
+    }
+    .nav-links {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 120%;
+      flex-direction: column;
+      gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      padding: 1rem;
+      min-width: 260px;
+      box-shadow: var(--shadow-soft);
+    }
+    .nav-links.open {
+      display: flex;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      color: var(--text-main);
+      padding: 0.4rem 0;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover {
+      color: var(--gold-beige);
+    }
+    .mobile-nav-toggle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(26, 23, 21, 0.2);
+      background: var(--card-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .mobile-nav-toggle span,
+    .mobile-nav-toggle span::before,
+    .mobile-nav-toggle span::after {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--ink);
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    .mobile-nav-toggle span::before {
+      position: absolute;
+      top: -6px;
+    }
+    .mobile-nav-toggle span::after {
+      position: absolute;
+      top: 6px;
+    }
+    .primary-cta {
+      padding: 0.8rem 1.6rem;
+      background: rgba(227, 192, 138, 0.15);
+      color: var(--ink);
+      border-radius: 999px;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+      border: 2px solid var(--gold-beige);
+      box-shadow: 0 4px 12px rgba(227, 192, 138, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    .primary-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(227, 192, 138, 0.25);
+      background: rgba(227, 192, 138, 0.25);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      border: 1px solid transparent;
+      font-weight: 600;
+    }
+    .btn-primary {
+      background: rgba(227, 192, 138, 0.15);
+      color: var(--ink);
+      box-shadow: 0 4px 12px rgba(227, 192, 138, 0.15);
+      border: 2px solid var(--gold-beige);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(227, 192, 138, 0.25);
+      background: rgba(227, 192, 138, 0.25);
+    }
+    .hero {
+      padding: clamp(1.5rem, 3vw, 2.5rem) 0 2rem;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(227,192,138,0.28), transparent 55%),
+        radial-gradient(circle at 90% 80%, rgba(26,23,21,0.06), transparent 50%),
+        linear-gradient(135deg, #FFFFFF, #FDFBF8);
+      position: relative;
+      overflow: hidden;
+    }
+    .news-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .news-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 2rem;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .news-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 45px rgba(0,0,0,0.08);
+    }
+    .news-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .news-date {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .news-category {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--gold-beige);
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      background: rgba(227, 192, 138, 0.1);
+      border-radius: 999px;
+    }
+    .news-card h3 {
+      margin: 0.5rem 0 1rem;
+      font-size: 1.3rem;
+      color: var(--ink);
+    }
+    .news-card p {
+      margin: 0;
+      color: var(--text-main);
+    }
+    footer {
+      background: #3A322C;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 4rem 0 1.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      margin-top: 2rem;
+      line-height: 1.9;
+    }
+    footer a {
+      color: rgba(255, 255, 255, 0.85);
+      transition: color 0.2s ease;
+    }
+    footer a:hover {
+      color: var(--gold-beige);
+    }
+    .footer-logo-area {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .footer-logo-area img {
+      width: 120px;
+      height: auto;
+      margin: 0 auto 1rem;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+    .footer-logo-area h3 {
+      font-size: 1.5rem;
+      color: #FFF;
+      margin: 0;
+      letter-spacing: 0.08em;
+    }
+    .contact-footer {
+      display: grid;
+      gap: 2.5rem;
+    }
+    footer .btn-primary {
+      background: linear-gradient(135deg, var(--gold-beige), #D4A574);
+      color: var(--ink);
+      border: 2px solid var(--gold-beige);
+      box-shadow: 0 6px 20px rgba(227, 192, 138, 0.4);
+      font-weight: 700;
+    }
+    footer .btn-primary:hover {
+      background: linear-gradient(135deg, #F0D4A8, var(--gold-beige));
+      box-shadow: 0 10px 30px rgba(227, 192, 138, 0.6);
+      transform: translateY(-2px);
+    }
+    .contact-footer .btn.btn-secondary {
+      border-color: rgba(255, 255, 255, 0.7);
+      color: #FFF;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      background: transparent;
+    }
+    .contact-footer .btn.btn-secondary:hover {
+      background: rgba(227, 192, 138, 0.2);
+      border-color: var(--gold-beige);
+    }
+    .footer-note {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      opacity: 0.8;
+    }
+    @media (max-width: 767px) {
+      .header-inner {
+        max-height: 70px;
+        padding: 0.5rem 0.8rem;
+        gap: 0;
+        position: relative;
+        justify-content: flex-start;
+      }
+      .logo {
+        gap: 0;
+        z-index: 2;
+      }
+      .logo span {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 0.9rem;
+        font-weight: 600;
+        white-space: nowrap;
+        z-index: 1;
+      }
+      .logo img {
+        height: 40px;
+        max-width: 50px;
+      }
+      .mobile-nav-toggle {
+        position: absolute;
+        right: 0.8rem;
+        z-index: 2;
+      }
+      nav {
+        position: static;
+      }
+      .primary-cta {
+        display: none;
+      }
+    }
+    @media (min-width: 768px) {
+      .nav-links {
+        position: static;
+        flex-direction: row;
+        align-items: center;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        display: flex;
+        gap: 1.4rem;
+        padding: 0;
+      }
+      .mobile-nav-toggle {
+        display: none;
+      }
+      .news-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .contact-footer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <img src="画像/S__13787165_0.jpg" alt="日本機能的美姿勢協会 ロゴ">
+        <span>日本機能的美姿勢協会</span>
+      </a>
+      <button class="mobile-nav-toggle" aria-label="ナビゲーションを開く">
+        <span></span>
+      </button>
+      <nav>
+        <div class="nav-links">
+          <a href="index.html#home">HOME</a>
+          <a href="index.html#concept">CONCEPT</a>
+          <a href="index.html#functional-posture">FUNCTIONAL POSTURE</a>
+          <a href="programs.html">PROGRAMS</a>
+          <a href="cases.html">CASE STUDY</a>
+          <a href="index.html#trainer">ABOUT</a>
+          <a href="price.html">PRICE</a>
+          <a href="index.html#access">ACCESS</a>
+          <a href="flow.html">FLOW</a>
+          <a href="news.html">NEWS</a>
+          <a href="index.html#contact">CONTACT</a>
+        </div>
+      </nav>
+      <a class="primary-cta" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINEで相談する</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="padding: 4rem 0 3rem;">
+      <div class="container">
+        <p class="section-eyebrow">News & Activity</p>
+        <h1 class="section-title">お知らせ・活動レポート</h1>
+        <p>協会の最新情報、イベント告知、導入事例の詳細レポートをお届けします。</p>
+      </div>
+    </section>
+
+    <section style="background: var(--base-bg);">
+      <div class="container">
+        <div class="news-grid">
+          <article class="news-card">
+            <div class="news-header">
+              <span class="news-date">2025.02.14</span>
+              <span class="news-category">活動レポート</span>
+            </div>
+            <h3>信用金庫向けオンライン体操教室を開催しました</h3>
+            <p>京都の信用金庫様にて、デスクワーカーの肩こり・身体の衰え対策を中心としたオンライン体操教室を開催。120名が参加し、参加者の85%が「肩こりが軽減した」と回答。在宅勤務者も含め、全国から参加いただきました。座りっぱなし対策ストレッチと姿勢改善エクササイズを中心に、企業の健康経営施策として高い評価を得ました。</p>
+          </article>
+
+          <article class="news-card">
+            <div class="news-header">
+              <span class="news-date">2025.01.28</span>
+              <span class="news-category">お知らせ</span>
+            </div>
+            <h3>新しい団体研修パッケージ「Functional Posture Lab」をリリース</h3>
+            <p>見た目と機能美を両立させる5ステップをまとめた団体研修パッケージをリリースしました。スポーツサークル・企業クラブ活動・自治体イベント向けに、姿勢評価、体操教室、筋肉と関節の連動性トレーニング、正確な身体操作の言語化ワークを一貫してサポート。資料請求はLINEから可能です。</p>
+          </article>
+
+          <article class="news-card">
+            <div class="news-header">
+              <span class="news-date">2025.01.15</span>
+              <span class="news-category">活動レポート</span>
+            </div>
+            <h3>大学サッカー部の90日プログラムが完了、負傷離脱者25%減を達成</h3>
+            <p>関西の大学サッカー部（部員数35名）に対し、90日間の姿勢評価プログラムを実施しました。シーズン後半の負傷離脱者が前年比25%減少し、監督・選手から高い評価をいただきました。「ウォームアップの質が変わった」「怪我の予兆に気づけるようになった」との声が多数。チーム全体で「正確な身体操作」を共通言語にすることで、怪我リスク低減とパフォーマンス向上を実現しました。</p>
+          </article>
+
+          <article class="news-card">
+            <div class="news-header">
+              <span class="news-date">2024.12.20</span>
+              <span class="news-category">お知らせ</span>
+            </div>
+            <h3>年末年始の営業時間変更のお知らせ</h3>
+            <p>2024年12月29日〜2025年1月5日は休館となります。LINEでのお問い合わせは随時受け付けておりますが、返信は1月6日以降となります。ご了承ください。新年は1月6日（月）9:00より通常営業いたします。本年も多くの皆さまにご利用いただき、誠にありがとうございました。来年もどうぞよろしくお願いいたします。</p>
+          </article>
+
+          <article class="news-card">
+            <div class="news-header">
+              <span class="news-date">2024.12.05</span>
+              <span class="news-category">活動レポート</span>
+            </div>
+            <h3>中学校バスケ部への姿勢評価プログラム、シュート成功率8%向上</h3>
+            <p>中学校バスケットボール部（部員数28名）に対し、3か月間の姿勢評価プログラムを実施。体幹の使い方や肩甲骨周りの連動性を指導し、シュートフォームの安定性を向上させました。結果、部員全体のシュート成功率が平均8%アップし、県大会ベスト8進出を果たしました。顧問の先生からは「姿勢を意識するだけで、こんなにフォームが安定するとは」との声をいただきました。</p>
+          </article>
+
+          <article class="news-card">
+            <div class="news-header">
+              <span class="news-date">2024.11.18</span>
+              <span class="news-category">お知らせ</span>
+            </div>
+            <h3>施術家向け教育プログラム「姿勢評価マスターコース」受講生募集中</h3>
+            <p>理学療法士・柔道整復師・パーソナルトレーナー・ヨガインストラクター向けの教育プログラム「姿勢評価マスターコース」の受講生を募集しています。姿勢評価技術の習得、筋膜リリース実技、関節連動性の理論と実践、クライアント対応ノウハウを6か月間で学べます。詳細はLINEでお問い合わせください。</p>
+          </article>
+
+          <article class="news-card">
+            <div class="news-header">
+              <span class="news-date">2024.10.30</span>
+              <span class="news-category">活動レポート</span>
+            </div>
+            <h3>社会人バレーボールチームの60日プログラム完了、腰痛訴え60%減</h3>
+            <p>社会人バレーボールチーム（20代後半〜40代のメンバー15名）に対し、60日間の短期集中プログラムを実施。ジャンプ・着地動作を再教育し、動かせていない筋肉を意識化。1か月で腰痛の訴えが半数以下に減少し、ジャンプ力も平均11%向上しました。「40代でもまだ伸びしろがある」との声が多く、身体の衰えを感じていたメンバーに自信を取り戻していただきました。</p>
+          </article>
+
+          <article class="news-card">
+            <div class="news-header">
+              <span class="news-date">2024.10.10</span>
+              <span class="news-category">お知らせ</span>
+            </div>
+            <h3>LINE登録から30日以内の申し込みで入会金無料キャンペーン継続中</h3>
+            <p>LINE公式アカウント登録から30日以内にプログラムをお申し込みいただいた方は、入会金33,000円が無料となるキャンペーンを継続中です。初回カウンセリングは完全無料、入会前提なしでお気軽にご相談いただけます。スポーツサークル・企業・自治体・施術家の皆さま、まずはLINEで課題をお聞かせください。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-logo-area">
+        <img src="画像/S__13787165_0.jpg" alt="日本機能的美姿勢協会 ロゴ">
+        <h3>日本機能的美姿勢協会</h3>
+      </div>
+      <div class="contact-footer">
+        <div>
+          <p class="section-eyebrow">Contact</p>
+          <h2 style="margin-top:0.5rem; color:#FFF;">スポーツサークル・アスリート・企業ご担当者・施術家の皆さまへ</h2>
+          <p>LINE登録で最新情報と個別チャットを開始できます。メールでの資料請求もお気軽にどうぞ。</p>
+          <div style="margin-top:1.5rem; display: flex; flex-wrap: wrap; gap: 1rem;">
+            <a class="btn btn-primary" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINEで相談する</a>
+            <a class="btn btn-secondary" href="mailto:contact@kinouteki-bishisei.jp">メールフォーム</a>
+          </div>
+          <p style="margin-top:1.5rem; font-size:0.95rem;">LINE ID：@postureline<br>Mail：contact@kinouteki-bishisei.jp<br>Tel：0774-54-0803</p>
+        </div>
+        <div>
+          <h3 style="color:#FFF; font-size:1.4rem;">協会情報</h3>
+          <p>〒610-0101 京都府城陽市久世北垣内1-8</p>
+          <p>JR奈良線「城陽駅」徒歩5分 / 近鉄「久津川駅」徒歩8分</p>
+          <p>営業時間：平日9:00-21:00 / 土曜9:00-18:00 / 日祝休館</p>
+          <p style="margin-top:1rem;">SNS：<a href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINE公式</a> / <a href="#" target="_blank" rel="noopener">Instagram</a> / <a href="#" target="_blank" rel="noopener">YouTube</a></p>
+        </div>
+      </div>
+    </div>
+    <p class="footer-note">© 2025 日本機能的美姿勢協会 All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    const header = document.getElementById('site-header');
+    const mobileToggle = document.querySelector('.mobile-nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>

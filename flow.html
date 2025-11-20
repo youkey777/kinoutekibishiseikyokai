@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>初回体験の流れ | 日本機能的美姿勢協会</title>
+  <style>
+    :root {
+      --base-bg: #FDFBF8;
+      --card-bg: #FFFFFF;
+      --gold-beige: #E3C08A;
+      --gold-beige-light: #F5E4C8;
+      --ink: #1A1715;
+      --text-main: #332B25;
+      --text-muted: #6B635C;
+      --line: rgba(0,0,0,0.06);
+      --shadow-soft: 0 18px 35px rgba(0,0,0,0.04);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--base-bg);
+      color: var(--text-main);
+      line-height: 1.8;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    a {
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+    a:hover {
+      color: var(--gold-beige);
+    }
+    section a {
+      color: var(--ink);
+    }
+    section a:hover {
+      color: var(--gold-beige);
+    }
+    button {
+      font-family: inherit;
+    }
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+    section {
+      position: relative;
+      padding-block: clamp(36px, 5vw, 74px);
+    }
+    .section-eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.42em;
+      color: var(--gold-beige);
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 500;
+    }
+    .section-eyebrow::before {
+      content: "";
+      width: 20px;
+      height: 1px;
+      background: var(--gold-beige);
+      display: inline-block;
+    }
+    .section-title {
+      position: relative;
+      font-size: clamp(1.8rem, 2.4vw, 2.3rem);
+      margin: 0.6rem 0 1.3rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      font-weight: 700;
+      animation: softFadeUp 1s ease-out;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold-beige), transparent);
+      margin-top: 0.8rem;
+    }
+    @keyframes softFadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(253, 251, 248, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    header.scrolled {
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    }
+    .header-inner {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem;
+      max-height: 80px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      color: var(--ink);
+    }
+    .logo span {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      writing-mode: horizontal-tb;
+    }
+    .logo img {
+      width: auto;
+      height: 50px;
+      max-width: 160px;
+      object-fit: contain;
+    }
+    nav {
+      position: relative;
+    }
+    .nav-links {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 120%;
+      flex-direction: column;
+      gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      padding: 1rem;
+      min-width: 260px;
+      box-shadow: var(--shadow-soft);
+    }
+    .nav-links.open {
+      display: flex;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      color: var(--text-main);
+      padding: 0.4rem 0;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover {
+      color: var(--gold-beige);
+    }
+    .mobile-nav-toggle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(26, 23, 21, 0.2);
+      background: var(--card-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .mobile-nav-toggle span,
+    .mobile-nav-toggle span::before,
+    .mobile-nav-toggle span::after {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--ink);
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    .mobile-nav-toggle span::before {
+      position: absolute;
+      top: -6px;
+    }
+    .mobile-nav-toggle span::after {
+      position: absolute;
+      top: 6px;
+    }
+    .primary-cta {
+      padding: 0.8rem 1.6rem;
+      background: rgba(227, 192, 138, 0.15);
+      color: var(--ink);
+      border-radius: 999px;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+      border: 2px solid var(--gold-beige);
+      box-shadow: 0 4px 12px rgba(227, 192, 138, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    .primary-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(227, 192, 138, 0.25);
+      background: rgba(227, 192, 138, 0.25);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      border: 1px solid transparent;
+      font-weight: 600;
+    }
+    .btn-primary {
+      background: rgba(227, 192, 138, 0.15);
+      color: var(--ink);
+      box-shadow: 0 4px 12px rgba(227, 192, 138, 0.15);
+      border: 2px solid var(--gold-beige);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(227, 192, 138, 0.25);
+      background: rgba(227, 192, 138, 0.25);
+    }
+    .hero {
+      padding: clamp(1.5rem, 3vw, 2.5rem) 0 2rem;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(227,192,138,0.28), transparent 55%),
+        radial-gradient(circle at 90% 80%, rgba(26,23,21,0.06), transparent 50%),
+        linear-gradient(135deg, #FFFFFF, #FDFBF8);
+      position: relative;
+      overflow: hidden;
+    }
+    .flow-step {
+      display: flex;
+      gap: 2rem;
+      align-items: start;
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 2.5rem;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 2rem;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .flow-step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 45px rgba(0,0,0,0.08);
+    }
+    .flow-step::before {
+      content: '';
+      position: absolute;
+      left: 70px;
+      bottom: -2rem;
+      width: 2px;
+      height: 2rem;
+      background: linear-gradient(180deg, var(--gold-beige), transparent);
+    }
+    .flow-step:last-of-type::before {
+      display: none;
+    }
+    .flow-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(227, 192, 138, 0.2);
+      display: grid;
+      place-items: center;
+      color: var(--gold-beige);
+      flex-shrink: 0;
+      font-weight: 700;
+      font-size: 1.8rem;
+      border: 3px solid var(--gold-beige);
+    }
+    .flow-content h3 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: var(--ink);
+    }
+    .flow-content p {
+      margin: 0.5rem 0;
+    }
+    .flow-details {
+      margin-top: 1rem;
+      padding: 1.5rem;
+      background: rgba(245, 228, 200, 0.15);
+      border-radius: 12px;
+      border-left: 4px solid var(--gold-beige);
+    }
+    .flow-details h4 {
+      margin-top: 0;
+      color: var(--gold-beige);
+      font-size: 1.1rem;
+    }
+    footer {
+      background: #3A322C;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 4rem 0 1.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      margin-top: 2rem;
+      line-height: 1.9;
+    }
+    footer a {
+      color: rgba(255, 255, 255, 0.85);
+      transition: color 0.2s ease;
+    }
+    footer a:hover {
+      color: var(--gold-beige);
+    }
+    .footer-logo-area {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .footer-logo-area img {
+      width: 120px;
+      height: auto;
+      margin: 0 auto 1rem;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+    .footer-logo-area h3 {
+      font-size: 1.5rem;
+      color: #FFF;
+      margin: 0;
+      letter-spacing: 0.08em;
+    }
+    .contact-footer {
+      display: grid;
+      gap: 2.5rem;
+    }
+    footer .btn-primary {
+      background: linear-gradient(135deg, var(--gold-beige), #D4A574);
+      color: var(--ink);
+      border: 2px solid var(--gold-beige);
+      box-shadow: 0 6px 20px rgba(227, 192, 138, 0.4);
+      font-weight: 700;
+    }
+    footer .btn-primary:hover {
+      background: linear-gradient(135deg, #F0D4A8, var(--gold-beige));
+      box-shadow: 0 10px 30px rgba(227, 192, 138, 0.6);
+      transform: translateY(-2px);
+    }
+    .contact-footer .btn.btn-secondary {
+      border-color: rgba(255, 255, 255, 0.7);
+      color: #FFF;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      background: transparent;
+    }
+    .contact-footer .btn.btn-secondary:hover {
+      background: rgba(227, 192, 138, 0.2);
+      border-color: var(--gold-beige);
+    }
+    .footer-note {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      opacity: 0.8;
+    }
+    @media (max-width: 767px) {
+      .header-inner {
+        max-height: 70px;
+        padding: 0.5rem 0.8rem;
+        gap: 0;
+        position: relative;
+        justify-content: flex-start;
+      }
+      .logo {
+        gap: 0;
+        z-index: 2;
+      }
+      .logo span {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 0.9rem;
+        font-weight: 600;
+        white-space: nowrap;
+        z-index: 1;
+      }
+      .logo img {
+        height: 40px;
+        max-width: 50px;
+      }
+      .mobile-nav-toggle {
+        position: absolute;
+        right: 0.8rem;
+        z-index: 2;
+      }
+      nav {
+        position: static;
+      }
+      .primary-cta {
+        display: none;
+      }
+      .flow-step {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .flow-step::before {
+        left: 39px;
+      }
+    }
+    @media (min-width: 768px) {
+      .nav-links {
+        position: static;
+        flex-direction: row;
+        align-items: center;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        display: flex;
+        gap: 1.4rem;
+        padding: 0;
+      }
+      .mobile-nav-toggle {
+        display: none;
+      }
+      .contact-footer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <img src="画像/S__13787165_0.jpg" alt="日本機能的美姿勢協会 ロゴ">
+        <span>日本機能的美姿勢協会</span>
+      </a>
+      <button class="mobile-nav-toggle" aria-label="ナビゲーションを開く">
+        <span></span>
+      </button>
+      <nav>
+        <div class="nav-links">
+          <a href="index.html#home">HOME</a>
+          <a href="index.html#concept">CONCEPT</a>
+          <a href="index.html#functional-posture">FUNCTIONAL POSTURE</a>
+          <a href="programs.html">PROGRAMS</a>
+          <a href="cases.html">CASE STUDY</a>
+          <a href="index.html#trainer">ABOUT</a>
+          <a href="price.html">PRICE</a>
+          <a href="index.html#access">ACCESS</a>
+          <a href="flow.html">FLOW</a>
+          <a href="news.html">NEWS</a>
+          <a href="index.html#contact">CONTACT</a>
+        </div>
+      </nav>
+      <a class="primary-cta" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINEで相談する</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="padding: 4rem 0 3rem;">
+      <div class="container">
+        <p class="section-eyebrow">Trial Flow</p>
+        <h1 class="section-title">初回体験の流れ</h1>
+        <p>LINEで気軽に相談してから、実際の体験まで。5つのステップで安心してスタートできます。</p>
+      </div>
+    </section>
+
+    <section style="background: var(--base-bg);">
+      <div class="container">
+        <article class="flow-step">
+          <div class="flow-icon">01</div>
+          <div class="flow-content">
+            <h3>LINE相談・ヒアリング予約</h3>
+            <p>まずはLINE公式アカウントに登録し、簡単なメッセージをお送りください。「スポーツサークルの怪我を減らしたい」「身体の衰えを感じている」「チーム全体のパフォーマンスを上げたい」など、現在の課題や目標を共有していただきます。24時間以内に担当スタッフから返信し、オンラインまたは対面でのヒアリング日程をご提案します。</p>
+
+            <div class="flow-details">
+              <h4>このステップでやること</h4>
+              <ul>
+                <li>LINE公式アカウントに登録（ID：@postureline）</li>
+                <li>チーム・サークル・個人の課題や目標を簡単に共有</li>
+                <li>ヒアリング希望日時（候補3つ程度）を送信</li>
+                <li>担当スタッフから日程確定の返信を受け取る</li>
+              </ul>
+            </div>
+
+            <div class="flow-details">
+              <h4>所要時間</h4>
+              <p>LINE送信：3分 / 返信受け取り：24時間以内</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="flow-step">
+          <div class="flow-icon">02</div>
+          <div class="flow-content">
+            <h3>オンラインまたは対面ヒアリング（無料）</h3>
+            <p>予約いただいた日時に、オンライン（Zoom）または対面でヒアリングを実施します。60分程度のカウンセリングで、現在の身体の状態、怪我の履歴、パフォーマンス低下の原因、チーム全体の課題などを詳しく伺います。この段階で姿勢評価の簡易チェックも可能です（対面の場合）。無理な勧誘は一切ありませんので、お気軽にご相談ください。</p>
+
+            <div class="flow-details">
+              <h4>このステップでやること</h4>
+              <ul>
+                <li>Zoomまたは対面で60分のカウンセリング</li>
+                <li>現在の身体の状態・怪我の履歴・パフォーマンス低下の原因を共有</li>
+                <li>チーム全体の課題や目標をすり合わせ</li>
+                <li>姿勢評価の簡易チェック（対面の場合）</li>
+                <li>質問タイム（何でも聞いてください）</li>
+              </ul>
+            </div>
+
+            <div class="flow-details">
+              <h4>所要時間</h4>
+              <p>60分（完全無料 / 入会前提なし）</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="flow-step">
+          <div class="flow-icon">03</div>
+          <div class="flow-content">
+            <h3>プログラム提案・お見積り</h3>
+            <p>ヒアリング内容をもとに、最適なプログラムをご提案します。短期集中プラン、月額制サポート、オンライン講座、体操教室パッケージなど、複数のプランを組み合わせたオーダーメイドも可能です。料金、スケジュール、キャンセルポリシーを含めた詳細なお見積りを提示し、納得いただいてからのお申し込みとなります。この段階でも契約の義務はありません。</p>
+
+            <div class="flow-details">
+              <h4>このステップでやること</h4>
+              <ul>
+                <li>ヒアリング内容をもとに最適なプログラムをご提案</li>
+                <li>料金・スケジュール・キャンセルポリシーを含む詳細見積り</li>
+                <li>プログラムの組み合わせやオーダーメイド相談</li>
+                <li>疑問点・不安点の解消（納得いただくまで何度でも相談可能）</li>
+                <li>お申し込み意思の確認（無理な勧誘なし）</li>
+              </ul>
+            </div>
+
+            <div class="flow-details">
+              <h4>所要時間</h4>
+              <p>提案資料送付：2〜3営業日 / 相談回数：無制限</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="flow-step">
+          <div class="flow-icon">04</div>
+          <div class="flow-content">
+            <h3>当日の研修・講座実施</h3>
+            <p>いよいよプログラムスタートです。初回は姿勢評価（全体講義 + 個別チェック）から始まり、動かせていない筋肉を可視化。体操教室では、ウォームアップ・クールダウン技術、筋肉と関節の連動性トレーニング、正確な身体操作の言語化ワークを実施します。チーム全体で「この筋肉を意識する」という共通言語をつくり、怪我リスク低減とパフォーマンス向上を目指します。</p>
+
+            <div class="flow-details">
+              <h4>このステップでやること</h4>
+              <ul>
+                <li>姿勢評価（全体講義 + 個別チェック）</li>
+                <li>動かせていない筋肉の可視化</li>
+                <li>体操教室（ウォームアップ・クールダウン技術）</li>
+                <li>筋肉と関節の連動性トレーニング</li>
+                <li>正確な身体操作の言語化ワーク</li>
+                <li>質疑応答・個別アドバイス</li>
+              </ul>
+            </div>
+
+            <div class="flow-details">
+              <h4>所要時間</h4>
+              <p>60〜90分（プランにより異なります）</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="flow-step">
+          <div class="flow-icon">05</div>
+          <div class="flow-content">
+            <h3>アフターフォロー・継続サポート</h3>
+            <p>プログラム実施後も、LINE相談やオンラインフォローで継続的にサポートします。姿勢評価の結果をもとに、個別トレーニングメニューを作成し、進捗を確認。月次レポートで成果を可視化し、次のステップを一緒に考えます。継続プランへの移行や、追加セッションのご相談も柔軟に対応。チーム全体の怪我リスク低減とパフォーマンス向上を、長期的に伴走します。</p>
+
+            <div class="flow-details">
+              <h4>このステップでやること</h4>
+              <ul>
+                <li>LINE相談やオンラインフォローで継続サポート</li>
+                <li>姿勢評価結果をもとに個別トレーニングメニュー作成</li>
+                <li>進捗確認と月次レポート提供</li>
+                <li>継続プランへの移行相談</li>
+                <li>追加セッションのご提案</li>
+                <li>チーム全体の成果を可視化</li>
+              </ul>
+            </div>
+
+            <div class="flow-details">
+              <h4>所要時間</h4>
+              <p>LINE相談：随時 / 月次レポート：月1回 / オンラインフォロー：月2〜4回（プランにより異なります）</p>
+            </div>
+          </div>
+        </article>
+
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(227, 192, 138, 0.08); border-radius: 24px;">
+          <h3 style="margin-top: 0; color: var(--ink);">まずはLINEで気軽に相談してみませんか?</h3>
+          <p>初回カウンセリングは完全無料。入会前提なしで、お気軽にお問い合わせください。</p>
+          <a class="btn btn-primary" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINEで相談する</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-logo-area">
+        <img src="画像/S__13787165_0.jpg" alt="日本機能的美姿勢協会 ロゴ">
+        <h3>日本機能的美姿勢協会</h3>
+      </div>
+      <div class="contact-footer">
+        <div>
+          <p class="section-eyebrow">Contact</p>
+          <h2 style="margin-top:0.5rem; color:#FFF;">スポーツサークル・アスリート・企業ご担当者・施術家の皆さまへ</h2>
+          <p>LINE登録で最新情報と個別チャットを開始できます。メールでの資料請求もお気軽にどうぞ。</p>
+          <div style="margin-top:1.5rem; display: flex; flex-wrap: wrap; gap: 1rem;">
+            <a class="btn btn-primary" href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINEで相談する</a>
+            <a class="btn btn-secondary" href="mailto:contact@kinouteki-bishisei.jp">メールフォーム</a>
+          </div>
+          <p style="margin-top:1.5rem; font-size:0.95rem;">LINE ID：@postureline<br>Mail：contact@kinouteki-bishisei.jp<br>Tel：0774-54-0803</p>
+        </div>
+        <div>
+          <h3 style="color:#FFF; font-size:1.4rem;">協会情報</h3>
+          <p>〒610-0101 京都府城陽市久世北垣内1-8</p>
+          <p>JR奈良線「城陽駅」徒歩5分 / 近鉄「久津川駅」徒歩8分</p>
+          <p>営業時間：平日9:00-21:00 / 土曜9:00-18:00 / 日祝休館</p>
+          <p style="margin-top:1rem;">SNS：<a href="https://line.me/R/ti/p/postureline" target="_blank" rel="noopener">LINE公式</a> / <a href="#" target="_blank" rel="noopener">Instagram</a> / <a href="#" target="_blank" rel="noopener">YouTube</a></p>
+        </div>
+      </div>
+    </div>
+    <p class="footer-note">© 2025 日本機能的美姿勢協会 All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    const header = document.getElementById('site-header');
+    const mobileToggle = document.querySelector('.mobile-nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
